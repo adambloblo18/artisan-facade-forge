@@ -158,9 +158,13 @@
   }
 
   .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .js-ready .reveal-on-scroll:not(.is-visible) {
     opacity: 0;
     transform: translateY(16px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
   }
   .reveal-on-scroll.is-visible {
     opacity: 1;

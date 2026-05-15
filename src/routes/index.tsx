@@ -9,13 +9,13 @@ export const Route = createFileRoute("/")({
 });
 
 const PHOTOS = {
-  hero: "https://www.ceramique-murale.com/wp-content/uploads/2023/09/6E2BE403-A759-44F8-B5C1-29F488515E32.jpeg",
-  mosaique: "https://www.ceramique-murale.com/wp-content/uploads/2026/05/mosaique-sol.png",
-  halle: "https://www.ceramique-murale.com/wp-content/uploads/2026/04/La-Halle-restaurant.webp",
-  jouvette: "https://www.ceramique-murale.com/wp-content/uploads/2023/09/AFBED5B7-E1EE-411C-9252-6DD73E3660B4_1_105_c.jpeg",
-  laurence: "https://www.ceramique-murale.com/wp-content/uploads/2026/04/Laurence-peinture-classe.jpeg",
-  atelier: "https://www.ceramique-murale.com/wp-content/uploads/2020/02/atelier-laurence.jpg",
-  emaux: "https://www.ceramique-murale.com/wp-content/uploads/2026/04/Panneaux-emaux-scaled.jpeg",
+  hero: "/images/hero-castor.jpg",
+  mosaique: "/images/mosaique-sol.png",
+  halle: "/images/la-halle.webp",
+  jouvette: "/images/ferme-jouvette.jpg",
+  laurence: "/images/laurence.jpg",
+  atelier: "/images/atelier.jpg",
+  emaux: "/images/emaux.jpg",
 };
 
 const REEL = [
