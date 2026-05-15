@@ -91,12 +91,11 @@ function Home() {
           </div>
           <div className="lg:col-span-6 reveal-on-scroll">
             <div className="relative">
-              <img
+              <Zoomable
                 src={PHOTOS.hero}
                 alt="Façade céramique du restaurant Castor Bellux à Dinard, panneaux peints à la main"
                 className="w-full h-[420px] md:h-[560px] object-cover shadow-[0_40px_80px_-30px_rgba(20,49,59,0.45)]"
                 loading="eager"
-                fetchPriority="high"
               />
               <div className="hidden md:block absolute -bottom-6 -left-6 bg-[color:var(--cream)] border border-border px-5 py-4 shadow-lg max-w-[220px]">
                 <div className="flex items-center gap-2 text-[color:var(--gold)]">
@@ -137,20 +136,6 @@ function Home() {
           </div>
           <div className="reveal-on-scroll">
             <MultiStepForm />
-          </div>
-        </section>
-
-        {/* CITATION JURY */}
-        <section className="bg-[color:var(--anthracite)] text-[color:var(--cream)]">
-          <div className="container-px max-w-4xl mx-auto py-20 md:py-28 text-center reveal-on-scroll">
-            <Trophy className="h-10 w-10 text-[color:var(--gold)] mx-auto" />
-            <p className="mt-6 font-serif italic text-2xl md:text-3xl leading-snug text-balance">
-              « Une intervention exemplaire qui redonne vie au patrimoine céramique versaillais
-              avec une maîtrise technique et une sensibilité artistique remarquables. »
-            </p>
-            <p className="mt-6 text-sm uppercase tracking-[0.2em] text-[color:var(--cream)]/60">
-              Jury du Prix du Ravalement · Ville de Versailles · Édition 2025
-            </p>
           </div>
         </section>
 
@@ -198,6 +183,20 @@ function Home() {
                 <p className="mt-2 text-foreground/75 leading-relaxed">{p.body}</p>
               </article>
             ))}
+          </div>
+        </section>
+
+        {/* CITATION JURY */}
+        <section className="bg-[color:var(--anthracite)] text-[color:var(--cream)]">
+          <div className="container-px max-w-4xl mx-auto py-20 md:py-28 text-center reveal-on-scroll">
+            <Trophy className="h-10 w-10 text-[color:var(--gold)] mx-auto" />
+            <p className="mt-6 font-serif italic text-2xl md:text-3xl leading-snug text-balance">
+              « Une intervention exemplaire qui redonne vie au patrimoine céramique versaillais
+              avec une maîtrise technique et une sensibilité artistique remarquables. »
+            </p>
+            <p className="mt-6 text-sm uppercase tracking-[0.2em] text-[color:var(--cream)]/60">
+              Jury du Prix du Ravalement · Ville de Versailles · Édition 2025
+            </p>
           </div>
         </section>
 
