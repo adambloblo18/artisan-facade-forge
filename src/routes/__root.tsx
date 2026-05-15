@@ -150,7 +150,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "https://www.ceramique-murale.com/wp-content/uploads/2023/09/6E2BE403-A759-44F8-B5C1-29F488515E32.jpeg",
       },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Une façade qui transforme les passants en clients" },
+      { name: "twitter:title", content: "Une façade qui transforme les passants en clients | Laurence Brecher" },
       {
         name: "twitter:description",
         content: "Céramique architecturale pour restaurants, hôtels et architectes.",
@@ -160,6 +160,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "https://www.ceramique-murale.com/wp-content/uploads/2023/09/6E2BE403-A759-44F8-B5C1-29F488515E32.jpeg",
       },
+      { name: "description", content: "Premium B2B landing page for custom ceramic facades, targeting hospitality and architecture professionals." },
+      { property: "og:description", content: "Premium B2B landing page for custom ceramic facades, targeting hospitality and architecture professionals." },
+      { name: "twitter:description", content: "Premium B2B landing page for custom ceramic facades, targeting hospitality and architecture professionals." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/01242c57-5cda-45b4-8c63-0f4510a91326/id-preview-8792e632--2017d586-ac52-407f-b418-29a5341d784f.lovable.app-1778860076553.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/01242c57-5cda-45b4-8c63-0f4510a91326/id-preview-8792e632--2017d586-ac52-407f-b418-29a5341d784f.lovable.app-1778860076553.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
