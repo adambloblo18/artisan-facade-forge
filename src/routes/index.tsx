@@ -140,20 +140,6 @@ function Home() {
           </div>
         </section>
 
-        {/* CITATION JURY */}
-        <section className="bg-[color:var(--anthracite)] text-[color:var(--cream)]">
-          <div className="container-px max-w-4xl mx-auto py-20 md:py-28 text-center reveal-on-scroll">
-            <Trophy className="h-10 w-10 text-[color:var(--gold)] mx-auto" />
-            <p className="mt-6 font-serif italic text-2xl md:text-3xl leading-snug text-balance">
-              « Une intervention exemplaire qui redonne vie au patrimoine céramique versaillais
-              avec une maîtrise technique et une sensibilité artistique remarquables. »
-            </p>
-            <p className="mt-6 text-sm uppercase tracking-[0.2em] text-[color:var(--cream)]/60">
-              Jury du Prix du Ravalement · Ville de Versailles · Édition 2025
-            </p>
-          </div>
-        </section>
-
         {/* TROIS PROJETS */}
         <section id="realisations" className="container-px max-w-7xl mx-auto py-20 md:py-28">
           <div className="max-w-2xl reveal-on-scroll">
@@ -198,6 +184,20 @@ function Home() {
                 <p className="mt-2 text-foreground/75 leading-relaxed">{p.body}</p>
               </article>
             ))}
+          </div>
+        </section>
+
+        {/* CITATION JURY */}
+        <section className="bg-[color:var(--anthracite)] text-[color:var(--cream)]">
+          <div className="container-px max-w-4xl mx-auto py-20 md:py-28 text-center reveal-on-scroll">
+            <Trophy className="h-10 w-10 text-[color:var(--gold)] mx-auto" />
+            <p className="mt-6 font-serif italic text-2xl md:text-3xl leading-snug text-balance">
+              « Une intervention exemplaire qui redonne vie au patrimoine céramique versaillais
+              avec une maîtrise technique et une sensibilité artistique remarquables. »
+            </p>
+            <p className="mt-6 text-sm uppercase tracking-[0.2em] text-[color:var(--cream)]/60">
+              Jury du Prix du Ravalement · Ville de Versailles · Édition 2025
+            </p>
           </div>
         </section>
 
