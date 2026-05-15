@@ -209,7 +209,9 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   useEffect(() => {
-    if (typeof window === "undefined" || !("IntersectionObserver" in window)) {
+    if (typeof window === "undefined") return;
+    document.documentElement.classList.add("js-ready");
+    if (!("IntersectionObserver" in window)) {
       document.querySelectorAll(".reveal-on-scroll").forEach((el) => el.classList.add("is-visible"));
       return;
     }
