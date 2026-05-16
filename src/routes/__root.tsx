@@ -260,6 +260,7 @@ function RootComponent() {
         Aller au contenu
       </a>
       <Outlet />
+      <CookieBanner />
     </QueryClientProvider>
   );
 }
