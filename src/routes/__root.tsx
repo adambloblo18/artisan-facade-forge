@@ -210,6 +210,22 @@ function RootComponent() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+
+    try {
+      const url = new URL(window.location.href);
+      const adParams = ["gclid", "wbraid", "gbraid", "msclkid", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
+      adParams.forEach((key) => {
+        const val = url.searchParams.get(key);
+        if (val) sessionStorage.setItem(`lcm_${key}`, val);
+      });
+      if (!sessionStorage.getItem("lcm_landing")) {
+        sessionStorage.setItem("lcm_landing", window.location.href);
+      }
+      if (!sessionStorage.getItem("lcm_referrer") && document.referrer) {
+        sessionStorage.setItem("lcm_referrer", document.referrer);
+      }
+    } catch {}
+
     document.documentElement.classList.add("js-ready");
     if (!("IntersectionObserver" in window)) {
       document.querySelectorAll(".reveal-on-scroll").forEach((el) => el.classList.add("is-visible"));
