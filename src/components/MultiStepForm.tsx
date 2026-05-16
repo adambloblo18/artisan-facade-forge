@@ -168,7 +168,6 @@ export default function MultiStepForm() {
       {/* Honeypot - inert au lieu de aria-hidden pour ne pas bloquer GTM */}
       <div
         style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden", pointerEvents: "none" }}
-        // @ts-expect-error inert is a valid HTML attribute
         inert={true}
       >
         <input
