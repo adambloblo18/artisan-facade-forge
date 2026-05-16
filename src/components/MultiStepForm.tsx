@@ -17,7 +17,9 @@ const schema = z.object({
   telephone: z.string().trim().min(8, "Téléphone invalide").max(30),
   ville: z.string().trim().max(80).optional().or(z.literal("")),
   precisions: z.string().trim().max(800).optional().or(z.literal("")),
-  rgpd: z.literal(true, { errorMap: () => ({ message: "Merci d'accepter d'être recontacté." }) }),
+  rgpd: z.boolean().refine((v) => v === true, {
+    message: "Merci d'accepter d'être recontacté.",
+  }),
   botcheck: z.string().max(0).optional().or(z.literal("")),
 });
 
@@ -47,7 +49,7 @@ export default function MultiStepForm() {
       taille: undefined as unknown as FormValues["taille"],
       delai: undefined as unknown as FormValues["delai"],
       nom: "", email: "", telephone: "", ville: "", precisions: "",
-      rgpd: undefined as unknown as true,
+      rgpd: false as unknown as true,
       botcheck: "",
     },
     mode: "onTouched",
@@ -152,7 +154,11 @@ export default function MultiStepForm() {
   return (
     <form
       id="contact-form"
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(onSubmit, (errs) => {
+        console.error("[MultiStepForm] Validation errors:", errs);
+        const firstError = Object.values(errs)[0]?.message as string | undefined;
+        setSubmitError(firstError || "Merci de vérifier tous les champs obligatoires.");
+      })}
       noValidate
       className="max-w-2xl mx-auto bg-white shadow-[0_30px_80px_-40px_rgba(20,49,59,0.35)] rounded-sm p-6 md:p-10 border border-border/60"
     >
