@@ -154,7 +154,11 @@ export default function MultiStepForm() {
   return (
     <form
       id="contact-form"
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(onSubmit, (errs) => {
+        console.error("[MultiStepForm] Validation errors:", errs);
+        const firstError = Object.values(errs)[0]?.message as string | undefined;
+        setSubmitError(firstError || "Merci de vérifier tous les champs obligatoires.");
+      })}
       noValidate
       className="max-w-2xl mx-auto bg-white shadow-[0_30px_80px_-40px_rgba(20,49,59,0.35)] rounded-sm p-6 md:p-10 border border-border/60"
     >
