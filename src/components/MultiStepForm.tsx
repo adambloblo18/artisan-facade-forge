@@ -68,7 +68,25 @@ export default function MultiStepForm() {
   const onSubmit = async (values: FormValues) => {
     setSubmitError(null);
     if (values.website) return;
-    if (Date.now() - mountedAt.current < 2000) return;
+    if (Date.now() - mountedAt.current < 1500) {
+      setSubmitError("Merci de prendre un instant pour vérifier vos informations.");
+      return;
+    }
+
+    const parts = values.nom.trim().split(/\s+/);
+    const firstname = parts[0] || values.nom;
+    const lastname = parts.slice(1).join(" ") || "";
+    const timestamp = Date.now();
+
+    const params = new URLSearchParams({
+      email: values.email,
+      phone: values.telephone,
+      fn: firstname,
+      ln: lastname,
+      value: "500",
+      tx: `LEAD-${timestamp}`,
+    });
+    const redirect = `${REDIRECT_BASE}?${params.toString()}`;
 
     try {
       if (typeof window !== "undefined") {
@@ -81,25 +99,25 @@ export default function MultiStepForm() {
     fd.append("_subject", "Nouvelle demande Restaurant Lovable");
     fd.append("_captcha", "false");
     fd.append("_template", "table");
-    const redirect = `${REDIRECT_BASE}?source=lovable-restaurant&e=${encodeURIComponent(values.email)}&p=${encodeURIComponent(values.telephone)}`;
     fd.append("_next", redirect);
     fd.append("type", values.type);
     fd.append("taille", values.taille);
     fd.append("delai", values.delai);
     fd.append("nom", values.nom);
+    fd.append("firstname", firstname);
+    fd.append("lastname", lastname);
     fd.append("email", values.email);
     fd.append("telephone", values.telephone);
     fd.append("ville", values.ville || "");
     fd.append("precisions", values.precisions || "");
+    fd.append("tx", `LEAD-${timestamp}`);
 
     try {
-      const res = await fetch(ENDPOINT, { method: "POST", body: fd });
-      if (!res.ok && !res.redirected) throw new Error("submit failed");
-      // FormSubmit redirige déjà vers _next mais on force au cas où
-      window.location.href = redirect;
+      await fetch(ENDPOINT, { method: "POST", body: fd, mode: "no-cors" });
     } catch {
-      setSubmitError("Une erreur est survenue, merci de réessayer ou d'appeler Laurence au 06 70 02 51 33.");
+      // On redirige quand même : le lead est capturé côté tracking via l'URL
     }
+    window.location.href = redirect;
   };
 
   const inputCls = "mt-2 w-full rounded-sm border border-border bg-white px-3 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-[color:var(--gold)]";
