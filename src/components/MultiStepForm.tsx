@@ -156,8 +156,12 @@ export default function MultiStepForm() {
       noValidate
       className="max-w-2xl mx-auto bg-white shadow-[0_30px_80px_-40px_rgba(20,49,59,0.35)] rounded-sm p-6 md:p-10 border border-border/60"
     >
-      {/* Honeypot */}
-      <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}>
+      {/* Honeypot - inert au lieu de aria-hidden pour ne pas bloquer GTM */}
+      <div
+        style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden", pointerEvents: "none" }}
+        // @ts-expect-error inert is a valid HTML attribute
+        inert=""
+      >
         <input
           type="text"
           tabIndex={-1}
