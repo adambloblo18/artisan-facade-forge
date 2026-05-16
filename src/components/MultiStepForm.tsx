@@ -48,7 +48,7 @@ export default function MultiStepForm() {
       delai: undefined as unknown as FormValues["delai"],
       nom: "", email: "", telephone: "", ville: "", precisions: "",
       rgpd: undefined as unknown as true,
-      website: "",
+      botcheck: "",
     },
     mode: "onTouched",
   });
