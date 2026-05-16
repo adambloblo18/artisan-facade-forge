@@ -17,7 +17,9 @@ const schema = z.object({
   telephone: z.string().trim().min(8, "Téléphone invalide").max(30),
   ville: z.string().trim().max(80).optional().or(z.literal("")),
   precisions: z.string().trim().max(800).optional().or(z.literal("")),
-  rgpd: z.literal(true, { errorMap: () => ({ message: "Merci d'accepter d'être recontacté." }) }),
+  rgpd: z.boolean().refine((v) => v === true, {
+    message: "Merci d'accepter d'être recontacté.",
+  }),
   botcheck: z.string().max(0).optional().or(z.literal("")),
 });
 
