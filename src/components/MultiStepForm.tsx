@@ -69,7 +69,7 @@ export default function MultiStepForm() {
   const onSubmit = async (values: FormValues) => {
     setSubmitError(null);
     if (values.botcheck) return;
-    if (Date.now() - mountedAt.current < 1500) {
+    if (Date.now() - mountedAt.current < 500) {
       setSubmitError("Merci de prendre un instant pour vérifier vos informations.");
       return;
     }
@@ -87,6 +87,10 @@ export default function MultiStepForm() {
     } catch {}
 
     try {
+      console.log("[MultiStepForm] Submitting to Web3Forms", {
+        email: values.email,
+        type: values.type,
+      });
       const response = await fetch(WEB3FORMS_ENDPOINT, {
         method: "POST",
         headers: {
@@ -120,8 +124,25 @@ export default function MultiStepForm() {
         value: "500",
         tx: `LEAD-${timestamp}`,
       });
+
+      const adParams = ["gclid", "wbraid", "gbraid", "msclkid", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
+      adParams.forEach((key) => {
+        const val = sessionStorage.getItem(`lcm_${key}`);
+        if (val) params.set(key, val);
+      });
+
+      if (typeof window !== "undefined" && (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag) {
+        (window as unknown as { gtag: (...args: unknown[]) => void }).gtag("event", "conversion", {
+          send_to: "AW-11400865534/XrKfCJ-31J0cEP7Nrbwq",
+          value: 500.0,
+          currency: "EUR",
+          transaction_id: `LEAD-${timestamp}`,
+        });
+      }
+
       window.location.href = `${REDIRECT_BASE}?${params.toString()}`;
-    } catch {
+    } catch (err) {
+      console.error("[MultiStepForm] Submit error:", err);
       setSubmitError("Une erreur est survenue. Merci de réessayer ou d'appeler le 06 70 02 51 33.");
     }
   };
