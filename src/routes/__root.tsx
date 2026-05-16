@@ -10,6 +10,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import CookieBanner from "../components/CookieBanner";
 
 const consentScript = `
 window.dataLayer = window.dataLayer || [];
@@ -160,11 +161,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "https://www.ceramique-murale.com/wp-content/uploads/2023/09/6E2BE403-A759-44F8-B5C1-29F488515E32.jpeg",
       },
-      { name: "description", content: "Premium B2B landing page for custom ceramic facades, targeting hospitality and architecture professionals." },
-      { property: "og:description", content: "Premium B2B landing page for custom ceramic facades, targeting hospitality and architecture professionals." },
-      { name: "twitter:description", content: "Premium B2B landing page for custom ceramic facades, targeting hospitality and architecture professionals." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/01242c57-5cda-45b4-8c63-0f4510a91326/id-preview-8792e632--2017d586-ac52-407f-b418-29a5341d784f.lovable.app-1778860076553.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/01242c57-5cda-45b4-8c63-0f4510a91326/id-preview-8792e632--2017d586-ac52-407f-b418-29a5341d784f.lovable.app-1778860076553.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -215,6 +211,22 @@ function RootComponent() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+
+    try {
+      const url = new URL(window.location.href);
+      const adParams = ["gclid", "wbraid", "gbraid", "msclkid", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
+      adParams.forEach((key) => {
+        const val = url.searchParams.get(key);
+        if (val) sessionStorage.setItem(`lcm_${key}`, val);
+      });
+      if (!sessionStorage.getItem("lcm_landing")) {
+        sessionStorage.setItem("lcm_landing", window.location.href);
+      }
+      if (!sessionStorage.getItem("lcm_referrer") && document.referrer) {
+        sessionStorage.setItem("lcm_referrer", document.referrer);
+      }
+    } catch {}
+
     document.documentElement.classList.add("js-ready");
     if (!("IntersectionObserver" in window)) {
       document.querySelectorAll(".reveal-on-scroll").forEach((el) => el.classList.add("is-visible"));
@@ -248,6 +260,7 @@ function RootComponent() {
         Aller au contenu
       </a>
       <Outlet />
+      <CookieBanner />
     </QueryClientProvider>
   );
 }

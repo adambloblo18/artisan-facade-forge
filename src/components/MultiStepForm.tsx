@@ -69,7 +69,7 @@ export default function MultiStepForm() {
   const onSubmit = async (values: FormValues) => {
     setSubmitError(null);
     if (values.botcheck) return;
-    if (Date.now() - mountedAt.current < 1500) {
+    if (Date.now() - mountedAt.current < 500) {
       setSubmitError("Merci de prendre un instant pour vérifier vos informations.");
       return;
     }
@@ -87,6 +87,10 @@ export default function MultiStepForm() {
     } catch {}
 
     try {
+      console.log("[MultiStepForm] Submitting to Web3Forms", {
+        email: values.email,
+        type: values.type,
+      });
       const response = await fetch(WEB3FORMS_ENDPOINT, {
         method: "POST",
         headers: {
@@ -120,8 +124,25 @@ export default function MultiStepForm() {
         value: "500",
         tx: `LEAD-${timestamp}`,
       });
+
+      const adParams = ["gclid", "wbraid", "gbraid", "msclkid", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
+      adParams.forEach((key) => {
+        const val = sessionStorage.getItem(`lcm_${key}`);
+        if (val) params.set(key, val);
+      });
+
+      if (typeof window !== "undefined" && (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag) {
+        (window as unknown as { gtag: (...args: unknown[]) => void }).gtag("event", "conversion", {
+          send_to: "AW-11400865534/XrKfCJ-31J0cEP7Nrbwq",
+          value: 500.0,
+          currency: "EUR",
+          transaction_id: `LEAD-${timestamp}`,
+        });
+      }
+
       window.location.href = `${REDIRECT_BASE}?${params.toString()}`;
-    } catch {
+    } catch (err) {
+      console.error("[MultiStepForm] Submit error:", err);
       setSubmitError("Une erreur est survenue. Merci de réessayer ou d'appeler le 06 70 02 51 33.");
     }
   };
@@ -135,8 +156,12 @@ export default function MultiStepForm() {
       noValidate
       className="max-w-2xl mx-auto bg-white shadow-[0_30px_80px_-40px_rgba(20,49,59,0.35)] rounded-sm p-6 md:p-10 border border-border/60"
     >
-      {/* Honeypot */}
-      <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}>
+      {/* Honeypot - inert au lieu de aria-hidden pour ne pas bloquer GTM */}
+      <div
+        style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden", pointerEvents: "none" }}
+        // @ts-expect-error inert is a valid HTML attribute
+        inert=""
+      >
         <input
           type="text"
           tabIndex={-1}
