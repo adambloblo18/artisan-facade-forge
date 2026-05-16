@@ -130,11 +130,14 @@ export default function MultiStepForm() {
       className="max-w-2xl mx-auto bg-white shadow-[0_30px_80px_-40px_rgba(20,49,59,0.35)] rounded-sm p-6 md:p-10 border border-border/60"
     >
       {/* Honeypot */}
-      <input
-        type="text" tabIndex={-1} autoComplete="off" aria-hidden="true"
-        {...register("website")}
-        style={{ position: "absolute", left: "-9999px", width: 1, height: 1 }}
-      />
+      <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}>
+        <input
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          {...register("website")}
+        />
+      </div>
 
       {/* Steps indicator */}
       <div className="flex items-center gap-2 mb-8">
