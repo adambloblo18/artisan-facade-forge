@@ -4,7 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { ArrowRight, ArrowLeft, Loader2, Building2, Brush, LayoutGrid, Landmark, Sparkles } from "lucide-react";
 
-const ENDPOINT = "https://formsubmit.co/ceramiquemurale@gmail.com";
+const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
+const WEB3FORMS_ACCESS_KEY = "31bd2d6f-50c1-427d-9efd-cab0d1fada12";
 const REDIRECT_BASE = "https://www.ceramique-murale.com/merci-pour-votre-demande-de-projet/";
 
 const schema = z.object({
