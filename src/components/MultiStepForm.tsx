@@ -18,7 +18,7 @@ const schema = z.object({
   ville: z.string().trim().max(80).optional().or(z.literal("")),
   precisions: z.string().trim().max(800).optional().or(z.literal("")),
   rgpd: z.literal(true, { errorMap: () => ({ message: "Merci d'accepter d'être recontacté." }) }),
-  website: z.string().max(0).optional().or(z.literal("")),
+  botcheck: z.string().max(0).optional().or(z.literal("")),
 });
 
 type FormValues = z.infer<typeof schema>;
