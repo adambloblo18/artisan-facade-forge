@@ -70,7 +70,10 @@ export default function MultiStepForm() {
 
   const onSubmit = async (values: FormValues) => {
     setSubmitError(null);
-    if (values.botcheck) return;
+    if (values.botcheck && typeof values.botcheck === "string" && values.botcheck.trim().length > 0) {
+      console.warn("[MultiStepForm] Bot detected via honeypot");
+      return;
+    }
     if (Date.now() - mountedAt.current < 500) {
       setSubmitError("Merci de prendre un instant pour vérifier vos informations.");
       return;
