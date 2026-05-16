@@ -20,7 +20,7 @@ const schema = z.object({
   rgpd: z.boolean().refine((v) => v === true, {
     message: "Merci d'accepter d'être recontacté.",
   }),
-  botcheck: z.string().max(0).optional().or(z.literal("")),
+  botcheck: z.any().optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -70,7 +70,10 @@ export default function MultiStepForm() {
 
   const onSubmit = async (values: FormValues) => {
     setSubmitError(null);
-    if (values.botcheck) return;
+    if (values.botcheck && typeof values.botcheck === "string" && values.botcheck.trim().length > 0) {
+      console.warn("[MultiStepForm] Bot detected via honeypot");
+      return;
+    }
     if (Date.now() - mountedAt.current < 500) {
       setSubmitError("Merci de prendre un instant pour vérifier vos informations.");
       return;
@@ -165,8 +168,7 @@ export default function MultiStepForm() {
       {/* Honeypot - inert au lieu de aria-hidden pour ne pas bloquer GTM */}
       <div
         style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden", pointerEvents: "none" }}
-        // @ts-expect-error inert is a valid HTML attribute
-        inert=""
+        inert={true}
       >
         <input
           type="text"
