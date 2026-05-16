@@ -20,7 +20,7 @@ const schema = z.object({
   rgpd: z.boolean().refine((v) => v === true, {
     message: "Merci d'accepter d'être recontacté.",
   }),
-  botcheck: z.string().max(0).optional().or(z.literal("")),
+  botcheck: z.any().optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
