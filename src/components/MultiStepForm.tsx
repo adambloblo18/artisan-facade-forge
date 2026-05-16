@@ -4,7 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { ArrowRight, ArrowLeft, Loader2, Building2, Brush, LayoutGrid, Landmark, Sparkles } from "lucide-react";
 
-const ENDPOINT = "https://formsubmit.co/ceramiquemurale@gmail.com";
+const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
+const WEB3FORMS_ACCESS_KEY = "31bd2d6f-50c1-427d-9efd-cab0d1fada12";
 const REDIRECT_BASE = "https://www.ceramique-murale.com/merci-pour-votre-demande-de-projet/";
 
 const schema = z.object({
@@ -17,7 +18,7 @@ const schema = z.object({
   ville: z.string().trim().max(80).optional().or(z.literal("")),
   precisions: z.string().trim().max(800).optional().or(z.literal("")),
   rgpd: z.literal(true, { errorMap: () => ({ message: "Merci d'accepter d'être recontacté." }) }),
-  website: z.string().max(0).optional().or(z.literal("")),
+  botcheck: z.string().max(0).optional().or(z.literal("")),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -47,7 +48,7 @@ export default function MultiStepForm() {
       delai: undefined as unknown as FormValues["delai"],
       nom: "", email: "", telephone: "", ville: "", precisions: "",
       rgpd: undefined as unknown as true,
-      website: "",
+      botcheck: "",
     },
     mode: "onTouched",
   });
@@ -67,7 +68,7 @@ export default function MultiStepForm() {
 
   const onSubmit = async (values: FormValues) => {
     setSubmitError(null);
-    if (values.website) return;
+    if (values.botcheck) return;
     if (Date.now() - mountedAt.current < 1500) {
       setSubmitError("Merci de prendre un instant pour vérifier vos informations.");
       return;
@@ -78,16 +79,6 @@ export default function MultiStepForm() {
     const lastname = parts.slice(1).join(" ") || "";
     const timestamp = Date.now();
 
-    const params = new URLSearchParams({
-      email: values.email,
-      phone: values.telephone,
-      fn: firstname,
-      ln: lastname,
-      value: "500",
-      tx: `LEAD-${timestamp}`,
-    });
-    const redirect = `${REDIRECT_BASE}?${params.toString()}`;
-
     try {
       if (typeof window !== "undefined") {
         sessionStorage.setItem("lcm_email", values.email);
@@ -95,29 +86,44 @@ export default function MultiStepForm() {
       }
     } catch {}
 
-    const fd = new FormData();
-    fd.append("_subject", "Nouvelle demande Restaurant Lovable");
-    fd.append("_captcha", "false");
-    fd.append("_template", "table");
-    fd.append("_next", redirect);
-    fd.append("type", values.type);
-    fd.append("taille", values.taille);
-    fd.append("delai", values.delai);
-    fd.append("nom", values.nom);
-    fd.append("firstname", firstname);
-    fd.append("lastname", lastname);
-    fd.append("email", values.email);
-    fd.append("telephone", values.telephone);
-    fd.append("ville", values.ville || "");
-    fd.append("precisions", values.precisions || "");
-    fd.append("tx", `LEAD-${timestamp}`);
-
     try {
-      await fetch(ENDPOINT, { method: "POST", body: fd, mode: "no-cors" });
+      const response = await fetch(WEB3FORMS_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: "🏛️ Nouveau projet façade restaurant - ceramique-murale.com",
+          from_name: "Formulaire artisan-facade-forge",
+          cc: "bloch-adam@hotmail.com",
+          name: values.nom,
+          email: values.email,
+          phone: values.telephone,
+          message: values.precisions || "",
+          profil: values.ville || "",
+          type_projet: values.type,
+          budget: values.taille,
+          echeance: values.delai,
+          botcheck: values.botcheck || "",
+        }),
+      });
+      const result = await response.json();
+      if (result.success !== true) throw new Error(result.message || "submit failed");
+
+      const params = new URLSearchParams({
+        email: values.email,
+        phone: values.telephone || "",
+        fn: firstname,
+        ln: lastname,
+        value: "500",
+        tx: `LEAD-${timestamp}`,
+      });
+      window.location.href = `${REDIRECT_BASE}?${params.toString()}`;
     } catch {
-      // On redirige quand même : le lead est capturé côté tracking via l'URL
+      setSubmitError("Une erreur est survenue. Merci de réessayer ou d'appeler le 06 70 02 51 33.");
     }
-    window.location.href = redirect;
   };
 
   const inputCls = "mt-2 w-full rounded-sm border border-border bg-white px-3 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-[color:var(--gold)]";
@@ -135,7 +141,7 @@ export default function MultiStepForm() {
           type="text"
           tabIndex={-1}
           autoComplete="off"
-          {...register("website")}
+          {...register("botcheck")}
         />
       </div>
 
