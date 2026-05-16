@@ -169,7 +169,7 @@ export default function MultiStepForm() {
       <div
         style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden", pointerEvents: "none" }}
         // @ts-expect-error inert is a valid HTML attribute
-        inert=""
+        inert={true}
       >
         <input
           type="text"
