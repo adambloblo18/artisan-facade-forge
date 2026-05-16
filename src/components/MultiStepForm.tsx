@@ -49,7 +49,7 @@ export default function MultiStepForm() {
       taille: undefined as unknown as FormValues["taille"],
       delai: undefined as unknown as FormValues["delai"],
       nom: "", email: "", telephone: "", ville: "", precisions: "",
-      rgpd: undefined as unknown as true,
+      rgpd: false as unknown as true,
       botcheck: "",
     },
     mode: "onTouched",
