@@ -10,6 +10,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import CookieBanner from "../components/CookieBanner";
 
 const consentScript = `
 window.dataLayer = window.dataLayer || [];
