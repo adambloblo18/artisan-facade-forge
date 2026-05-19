@@ -9,8 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as Googleb6633cba44aa57ecDothtmlRouteImport } from './routes/googleb6633cba44aa57ec[.]html'
 import { Route as IndexRouteImport } from './routes/index'
 
+const Googleb6633cba44aa57ecDothtmlRoute =
+  Googleb6633cba44aa57ecDothtmlRouteImport.update({
+    id: '/googleb6633cba44aa57ec.html',
+    path: '/googleb6633cba44aa57ec.html',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +26,39 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/googleb6633cba44aa57ec.html': typeof Googleb6633cba44aa57ecDothtmlRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/googleb6633cba44aa57ec.html': typeof Googleb6633cba44aa57ecDothtmlRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/googleb6633cba44aa57ec.html': typeof Googleb6633cba44aa57ecDothtmlRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/googleb6633cba44aa57ec.html'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/googleb6633cba44aa57ec.html'
+  id: '__root__' | '/' | '/googleb6633cba44aa57ec.html'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  Googleb6633cba44aa57ecDothtmlRoute: typeof Googleb6633cba44aa57ecDothtmlRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/googleb6633cba44aa57ec.html': {
+      id: '/googleb6633cba44aa57ec.html'
+      path: '/googleb6633cba44aa57ec.html'
+      fullPath: '/googleb6633cba44aa57ec.html'
+      preLoaderRoute: typeof Googleb6633cba44aa57ecDothtmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +71,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  Googleb6633cba44aa57ecDothtmlRoute: Googleb6633cba44aa57ecDothtmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
