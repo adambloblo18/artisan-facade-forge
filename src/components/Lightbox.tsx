@@ -16,8 +16,7 @@ export default function Lightbox() {
     openLightboxFn = (i) => {
       setImg(i);
       try {
-        // @ts-expect-error posthog injected at runtime
-        window.posthog && window.posthog.capture("image_zoom", { image_alt: i.alt, image_src: i.src });
+        (window as any).posthog?.capture?.("image_zoom", { image_alt: i.alt, image_src: i.src });
       } catch {}
     };
     return () => { openLightboxFn = null; };
