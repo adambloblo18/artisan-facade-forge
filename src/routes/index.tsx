@@ -65,7 +65,7 @@ function Home() {
 
         {/* HERO */}
         <section className="container-px max-w-7xl mx-auto pt-12 md:pt-20 pb-16 md:pb-24 grid lg:grid-cols-12 gap-10 items-center">
-          <div className="lg:col-span-6 reveal-on-scroll">
+          <div className="order-2 lg:order-1 lg:col-span-6 reveal-on-scroll">
             <div className="inline-flex items-center gap-2 text-xs text-foreground/70 border border-border bg-white/60 rounded-full px-3 py-1.5">
               <span className="text-[color:var(--gold)]">★★★★★</span>
               <span>5,0 sur Google</span>
@@ -89,12 +89,12 @@ function Home() {
               </a>
             </div>
           </div>
-          <div className="lg:col-span-6 reveal-on-scroll">
+          <div className="order-1 lg:order-2 lg:col-span-6 reveal-on-scroll">
             <div className="relative">
               <Zoomable
                 src={PHOTOS.hero}
                 alt="Façade céramique du restaurant Castor Bellux à Dinard, panneaux peints à la main"
-                className="w-full h-[420px] md:h-[560px] object-cover shadow-[0_40px_80px_-30px_rgba(20,49,59,0.45)]"
+                className="w-full h-[320px] md:h-[560px] object-cover shadow-[0_40px_80px_-30px_rgba(20,49,59,0.45)]"
                 loading="eager"
               />
               <div className="hidden md:block absolute -bottom-6 -left-6 bg-[color:var(--cream)] border border-border px-5 py-4 shadow-lg max-w-[220px]">
