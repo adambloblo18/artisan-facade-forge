@@ -79,8 +79,9 @@ export default function CookieBanner() {
       const now = Date.now();
       if (now - lastRun < 200) return;
       lastRun = now;
-      const max = document.documentElement.scrollHeight;
-      const pct = (window.scrollY + window.innerHeight) / max;
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollable <= 0) return;
+      const pct = window.scrollY / scrollable;
       if (pct > SCROLL_THRESHOLD) {
         accept("scroll");
       }
