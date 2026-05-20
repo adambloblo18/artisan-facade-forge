@@ -125,20 +125,6 @@ function Home() {
           </div>
         </section>
 
-        {/* FORMULAIRE */}
-        <section id="contact" className="container-px max-w-7xl mx-auto py-20 md:py-28">
-          <div className="text-center max-w-2xl mx-auto mb-10 reveal-on-scroll">
-            <p className="eyebrow">Estimation gratuite</p>
-            <h2 className="text-3xl md:text-5xl mt-3">Parlons de votre projet</h2>
-            <p className="mt-4 text-foreground/70">
-              4 champs, 30 secondes. Estimation par email en 1 heure (jours ouvrés).
-            </p>
-          </div>
-          <div className="reveal-on-scroll">
-            <MultiStepForm />
-          </div>
-        </section>
-
         {/* TROIS PROJETS */}
         <section id="realisations" className="container-px max-w-7xl mx-auto py-20 md:py-28">
           <div className="max-w-2xl reveal-on-scroll">
@@ -185,6 +171,21 @@ function Home() {
             ))}
           </div>
         </section>
+
+        {/* FORMULAIRE */}
+        <section id="contact" className="container-px max-w-7xl mx-auto py-20 md:py-28">
+          <div className="text-center max-w-2xl mx-auto mb-10 reveal-on-scroll">
+            <p className="eyebrow">Estimation gratuite</p>
+            <h2 className="text-3xl md:text-5xl mt-3">Parlons de votre projet</h2>
+            <p className="mt-4 text-foreground/70">
+              4 champs, 30 secondes. Estimation par email en 1 heure (jours ouvrés).
+            </p>
+          </div>
+          <div className="reveal-on-scroll">
+            <MultiStepForm />
+          </div>
+        </section>
+
 
         {/* CITATION JURY */}
         <section className="bg-[color:var(--anthracite)] text-[color:var(--cream)]">
