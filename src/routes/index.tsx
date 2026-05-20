@@ -351,7 +351,21 @@ function Home() {
         </footer>
       </main>
 
+      {/* Bandeau flottant mobile */}
+      <div
+        className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-[color:var(--cream)]/95 backdrop-blur-md border-t border-border shadow-[0_-8px_24px_-12px_rgba(20,49,59,0.25)] px-4 py-3 flex items-center gap-2"
+        style={{ paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom))" }}
+      >
+        <a href="tel:+33670025133" className="btn-ghost flex-1 justify-center py-3 text-sm">
+          <Phone className="h-4 w-4" /> Appeler
+        </a>
+        <a href="#contact" className="btn-primary flex-1 justify-center py-3 text-sm">
+          Estimation <ArrowRight className="h-4 w-4" />
+        </a>
+      </div>
+
       <Lightbox />
     </>
   );
+
 }
