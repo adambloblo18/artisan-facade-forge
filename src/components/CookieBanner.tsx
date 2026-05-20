@@ -13,7 +13,7 @@ declare global {
 
 const STORAGE_KEY = "cookie_consent";
 const SIX_MONTHS_MS = 1000 * 60 * 60 * 24 * 30 * 6;
-const SCROLL_THRESHOLD = 1;
+const SCROLL_THRESHOLD = 0.05;
 
 type Consent = { status: "accepted" | "refused"; timestamp: number; method?: string };
 
@@ -79,8 +79,9 @@ export default function CookieBanner() {
       const now = Date.now();
       if (now - lastRun < 200) return;
       lastRun = now;
-      const max = document.documentElement.scrollHeight;
-      const pct = (window.scrollY + window.innerHeight) / max;
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollable <= 0) return;
+      const pct = window.scrollY / scrollable;
       if (pct > SCROLL_THRESHOLD) {
         accept("scroll");
       }
