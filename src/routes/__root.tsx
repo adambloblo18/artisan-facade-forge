@@ -136,7 +136,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Enseignes et décors céramique sur mesure pour restaurants, hôtels et architectes. Prix du Ravalement Versailles 2025. Réponse en 20 minutes.",
       },
-      { name: "robots", content: "noindex, follow" },
+      { name: "robots", content: "index, follow" },
       { name: "theme-color", content: "#14313b" },
       { httpEquiv: "content-language", content: "fr-FR" },
       { property: "og:type", content: "website" },
