@@ -130,14 +130,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=5" },
-      { title: "Une façade qui transforme les passants en clients | Laurence Brecher" },
+      { title: "Enseignes en céramique pour restaurants, Laurence Brecher" },
       {
         name: "description",
         content:
           "Enseignes et décors céramique sur mesure pour restaurants, hôtels et architectes. Prix du Ravalement Versailles 2025. Réponse en 20 minutes.",
       },
       { name: "robots", content: "index, follow" },
-      { name: "theme-color", content: "#14313b" },
+      { name: "theme-color", content: "#C1583E" },
+      { name: "apple-mobile-web-app-title", content: "Céramique Murale Brecher" },
+      { name: "application-name", content: "Céramique Murale Brecher" },
       { httpEquiv: "content-language", content: "fr-FR" },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "fr_FR" },
@@ -167,7 +169,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico" },
+      { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
+      { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
+      { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
+      { rel: "manifest", href: "/site.webmanifest" },
+      { rel: "shortcut icon", href: "/favicon.ico" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "preconnect", href: "https://www.ceramique-murale.com" },
