@@ -13,7 +13,7 @@ declare global {
 
 const STORAGE_KEY = "cookie_consent";
 const SIX_MONTHS_MS = 1000 * 60 * 60 * 24 * 30 * 6;
-const SCROLL_THRESHOLD = 0.4;
+const SCROLL_THRESHOLD = 1;
 
 type Consent = { status: "accepted" | "refused"; timestamp: number; method?: string };
 
