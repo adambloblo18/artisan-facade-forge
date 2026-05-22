@@ -147,42 +147,42 @@ export default function CookieBanner() {
       role="dialog"
       aria-labelledby="cookie-title"
       aria-describedby="cookie-desc"
-      className="fixed z-[1000] bg-[#FAF7F2] border border-[#D4A89B] rounded-sm p-5 font-sans"
+      className="fixed z-[1000] bg-[#FAF7F2] border border-[#D4A89B] rounded-sm p-3 font-sans sm:p-2.5"
       style={{
-        bottom: "var(--cookie-bottom, 24px)",
-        right: 16,
-        left: 16,
-        maxWidth: 340,
+        bottom: "var(--cookie-bottom, 12px)",
+        right: 8,
+        left: 8,
+        maxWidth: 280,
         marginLeft: "auto",
-        boxShadow: "0 4px 16px rgba(74, 107, 124, 0.12)",
-        transform: shown ? "translateY(0)" : "translateY(20px)",
+        boxShadow: "0 3px 10px rgba(74, 107, 124, 0.12)",
+        transform: shown ? "translateY(0)" : "translateY(16px)",
         opacity: shown ? 1 : 0,
-        transition: "all 400ms ease-out",
+        transition: "all 350ms ease-out",
       }}
     >
       <h2
         id="cookie-title"
-        className="text-[15px] font-medium text-[#4A6B7C] m-0"
+        className="text-[13px] font-medium text-[#4A6B7C] m-0"
         style={{ fontFamily: "Inter, sans-serif" }}
       >
         Cookies et données
       </h2>
       <p
         id="cookie-desc"
-        className="text-[13px] text-[#2A2A2A] mt-2"
-        style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.5 }}
+        className="text-[11px] text-[#2A2A2A] mt-1.5"
+        style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.45 }}
       >
         Nous utilisons des cookies pour mesurer l'audience et améliorer votre expérience.
         En poursuivant votre navigation, vous acceptez leur dépôt.
       </p>
-      <div className="mt-4 flex gap-2">
+      <div className="mt-2.5 flex gap-2">
         <button
           type="button"
           onClick={() => accept("click")}
-          className="text-[14px] rounded-sm hover:bg-[#5a7a6f] focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#6B8E7F]"
+          className="text-[12px] rounded-sm hover:bg-[#5a7a6f] focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#6B8E7F]"
           style={{
             flexGrow: 2,
-            padding: "10px 18px",
+            padding: "6px 12px",
             background: "#6B8E7F",
             color: "#FAF7F2",
             fontFamily: "Inter, sans-serif",
@@ -194,10 +194,10 @@ export default function CookieBanner() {
         <button
           type="button"
           onClick={refuse}
-          className="text-[14px] rounded-sm hover:opacity-100 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#6B8E7F]"
+          className="text-[12px] rounded-sm hover:opacity-100 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#6B8E7F]"
           style={{
             flexGrow: 1,
-            padding: "10px 18px",
+            padding: "6px 12px",
             background: "transparent",
             border: "1px solid rgba(42,42,42,0.2)",
             color: "rgba(42,42,42,0.7)",
@@ -211,7 +211,7 @@ export default function CookieBanner() {
         href="https://www.ceramique-murale.com/mentions-legales/"
         target="_blank"
         rel="noreferrer"
-        className="block mt-3 text-[11px] text-[#6B6B6B] hover:underline"
+        className="block mt-2 text-[10px] text-[#6B6B6B] hover:underline"
         style={{ fontFamily: "Inter, sans-serif", opacity: 0.7 }}
       >
         En savoir plus sur nos cookies
