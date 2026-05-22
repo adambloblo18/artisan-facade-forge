@@ -65,10 +65,11 @@ export default function Lightbox() {
 
 /** Wrap an <img> to make it click-to-zoom. */
 export function Zoomable({
-  src, alt, className, loading = "lazy", width, height,
+  src, alt, className, loading = "lazy", width, height, fetchPriority,
 }: {
   src: string; alt: string; className?: string;
   loading?: "lazy" | "eager"; width?: number; height?: number;
+  fetchPriority?: "high" | "low" | "auto";
 }) {
   return (
     <img
@@ -77,6 +78,8 @@ export function Zoomable({
       loading={loading}
       width={width}
       height={height}
+      fetchPriority={fetchPriority}
+      decoding={loading === "eager" ? "sync" : "async"}
       onClick={() => openLightbox({ src, alt })}
       className={`cursor-zoom-in ${className ?? ""}`}
     />
