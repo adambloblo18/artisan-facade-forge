@@ -59,12 +59,12 @@ posthog.init('phc_oGmkuM4F5je7WmaLZpsF47paa8nv5V5vp58oh74Pwcwy', {
   capture_pageleave: true,
   autocapture: true,
   cross_subdomain_cookie: true,
-  persistence: 'memory',
-  disable_session_recording: true,
+  persistence: 'localStorage+cookie',
+  disable_session_recording: false,
   respect_dnt: false,
   session_recording: {
-    maskAllInputs: true,
-    maskTextSelector: '.ph-mask, input[type="email"], input[type="tel"]'
+    maskAllInputs: false,
+    maskInputOptions: { password: true, email: false }
   }
 });},1200);});`;
 
