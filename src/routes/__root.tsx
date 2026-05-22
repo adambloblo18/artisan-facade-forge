@@ -176,7 +176,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "shortcut icon", href: "/favicon.ico" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "preconnect", href: "https://www.ceramique-murale.com" },
+      { rel: "preload", as: "image", href: "/images/hero-castor.webp", fetchPriority: "high" } as any,
       {
         rel: "stylesheet",
         href:
