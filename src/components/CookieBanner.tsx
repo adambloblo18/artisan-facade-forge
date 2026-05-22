@@ -39,11 +39,7 @@ function applyGranted() {
     ad_personalization: "granted",
     analytics_storage: "granted",
   });
-  window.posthog?.set_config({
-    persistence: "localStorage+cookie",
-    disable_session_recording: false,
-  });
-  window.posthog?.startSessionRecording();
+  // PostHog est déjà actif au chargement (intérêt légitime) — no-op.
 }
 
 function applyDenied() {
@@ -53,6 +49,8 @@ function applyDenied() {
     ad_personalization: "denied",
     analytics_storage: "denied",
   });
+  // Refus explicite : on coupe PostHog.
+  window.posthog?.opt_out_capturing?.();
   window.posthog?.set_config({
     persistence: "memory",
     disable_session_recording: true,
