@@ -7,6 +7,9 @@ declare global {
       opt_in_capturing: () => void;
       opt_out_capturing: () => void;
       capture: (event: string, props?: Record<string, unknown>) => void;
+      set_config: (config: Record<string, unknown>) => void;
+      startSessionRecording: () => void;
+      stopSessionRecording: () => void;
     };
   }
 }
@@ -36,7 +39,11 @@ function applyGranted() {
     ad_personalization: "granted",
     analytics_storage: "granted",
   });
-  window.posthog?.opt_in_capturing();
+  window.posthog?.set_config({
+    persistence: "localStorage+cookie",
+    disable_session_recording: false,
+  });
+  window.posthog?.startSessionRecording();
 }
 
 function applyDenied() {
@@ -46,7 +53,11 @@ function applyDenied() {
     ad_personalization: "denied",
     analytics_storage: "denied",
   });
-  window.posthog?.opt_out_capturing();
+  window.posthog?.set_config({
+    persistence: "memory",
+    disable_session_recording: true,
+  });
+  window.posthog?.stopSessionRecording();
 }
 
 export default function CookieBanner() {
