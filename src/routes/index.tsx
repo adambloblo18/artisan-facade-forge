@@ -9,13 +9,13 @@ export const Route = createFileRoute("/")({
 });
 
 const PHOTOS = {
-  hero: "/images/hero-castor.jpg",
-  mosaique: "/images/mosaique-sol.png",
+  hero: "/images/hero-castor.webp",
+  mosaique: "/images/mosaique-sol.webp",
   halle: "/images/la-halle.webp",
-  jouvette: "/images/ferme-jouvette.jpg",
-  laurence: "/images/laurence.jpg",
-  atelier: "/images/atelier.jpg",
-  emaux: "/images/emaux.jpg",
+  jouvette: "/images/ferme-jouvette.webp",
+  laurence: "/images/laurence.webp",
+  atelier: "/images/atelier.webp",
+  emaux: "/images/emaux.webp",
 };
 
 const REEL = [
