@@ -96,6 +96,9 @@ function Home() {
                 alt="Façade céramique du restaurant Castor Bellux à Dinard, panneaux peints à la main"
                 className="w-full h-[320px] md:h-[560px] object-cover shadow-[0_40px_80px_-30px_rgba(20,49,59,0.45)]"
                 loading="eager"
+                fetchPriority="high"
+                width={1920}
+                height={1280}
               />
               <div className="hidden md:block absolute -bottom-6 -left-6 bg-[color:var(--cream)] border border-border px-5 py-4 shadow-lg max-w-[220px]">
                 <div className="flex items-center gap-2 text-[color:var(--gold)]">
