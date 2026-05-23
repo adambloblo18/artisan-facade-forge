@@ -96,6 +96,15 @@ export default function MultiStepForm() {
         email: values.email,
         type: values.type,
       });
+
+      // Récupération des paramètres pub/UTM depuis sessionStorage pour le mail
+      const adParamKeys = ["gclid", "wbraid", "gbraid", "msclkid", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
+      const adData: Record<string, string> = {};
+      adParamKeys.forEach((key) => {
+        const val = typeof window !== "undefined" ? sessionStorage.getItem(`lcm_${key}`) : null;
+        if (val) adData[key] = val;
+      });
+
       const response = await fetch(WEB3FORMS_ENDPOINT, {
         method: "POST",
         headers: {
@@ -115,9 +124,12 @@ export default function MultiStepForm() {
           type_projet: values.type,
           budget: values.taille,
           echeance: values.delai,
+          ...adData,
           botcheck: values.botcheck || "",
         }),
       });
+
+
       const result = await response.json();
       if (result.success !== true) throw new Error(result.message || "submit failed");
 
