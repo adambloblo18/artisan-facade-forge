@@ -129,16 +129,7 @@ export default function MultiStepForm() {
         }),
       });
 
-          email: values.email,
-          phone: values.telephone,
-          message: values.precisions || "",
-          profil: values.ville || "",
-          type_projet: values.type,
-          budget: values.taille,
-          echeance: values.delai,
-          botcheck: values.botcheck || "",
-        }),
-      });
+
       const result = await response.json();
       if (result.success !== true) throw new Error(result.message || "submit failed");
 
