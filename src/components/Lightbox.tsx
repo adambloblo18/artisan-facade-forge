@@ -79,7 +79,7 @@ export function Zoomable({
       width={width}
       height={height}
       fetchPriority={fetchPriority}
-      decoding={loading === "eager" ? "sync" : "async"}
+      decoding="async"
       onClick={() => openLightbox({ src, alt })}
       className={`cursor-zoom-in ${className ?? ""}`}
     />
