@@ -280,6 +280,7 @@ function Home() {
                     src={img.src}
                     alt={img.alt}
                     className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                    images={REEL}
                   />
                 </div>
               ))}
@@ -308,9 +309,9 @@ function Home() {
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-3 reveal-on-scroll">
-                <Zoomable src={PHOTOS.laurence} alt="Laurence Brecher peignant une pièce de céramique" className="w-full h-72 object-cover col-span-2" />
-                <Zoomable src={PHOTOS.atelier} alt="Atelier de céramique au Vésinet" className="w-full h-52 object-cover" />
-                <Zoomable src={PHOTOS.emaux} alt="Palette de 200 émaux préparés à la main" className="w-full h-52 object-cover" />
+                <Zoomable src={PHOTOS.laurence} alt="Laurence Brecher peignant une pièce de céramique" className="w-full h-72 object-cover col-span-2" images={REEL} />
+                <Zoomable src={PHOTOS.atelier} alt="Atelier de céramique au Vésinet" className="w-full h-52 object-cover" images={REEL} />
+                <Zoomable src={PHOTOS.emaux} alt="Palette de 200 émaux préparés à la main" className="w-full h-52 object-cover" images={REEL} />
               </div>
             </div>
           </div>
