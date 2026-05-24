@@ -25,7 +25,7 @@ const professionalServiceLd = JSON.stringify({
   founder: {
     "@type": "Person",
     name: "Laurence Brecher",
-    award: "Prix du Ravalement de Versailles 2024",
+    award: "Prix du Ravalement de Versailles 2025",
   },
 });
 
@@ -103,7 +103,7 @@ function Home() {
               <span>Prix du Ravalement Versailles 2025</span>
             </div>
             <h1 className="mt-6 text-[2.4rem] md:text-[3.6rem] leading-[1.04] text-balance">
-              Une façade qui transforme les passants en{" "}
+              Une enseigne céramique qui transforme les passants en{" "}
               <em className="not-italic font-serif italic text-[color:var(--gold)]">clients.</em>
             </h1>
             <p className="mt-6 text-lg text-foreground/75 max-w-xl leading-relaxed">
