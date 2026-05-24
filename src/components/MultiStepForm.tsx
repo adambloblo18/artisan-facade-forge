@@ -307,7 +307,7 @@ export default function MultiStepForm() {
             </div>
             <div>
               <label htmlFor="telephone" className="text-sm font-medium">Téléphone *</label>
-              <input id="telephone" type="tel" autoComplete="tel" placeholder="06 12 34 56 78" {...register("telephone")} className={inputCls} />
+              <input id="telephone" type="tel" inputMode="tel" autoComplete="tel" placeholder="06 12 34 56 78" {...register("telephone")} className={inputCls} />
               {errors.telephone && <p className="mt-1 text-sm text-destructive">{errors.telephone.message}</p>}
             </div>
           </div>
