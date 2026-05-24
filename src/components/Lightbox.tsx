@@ -46,7 +46,7 @@ export default function Lightbox() {
   }, [index, close, goPrev, goNext]);
 
   useEffect(() => {
-    if (index >= 1 && images[index]) {
+    if (index >= 0 && images[index]) {
       try {
         (window as any).posthog?.capture?.("image_zoom", { image_alt: images[index].alt, image_src: images[index].src });
       } catch {}
