@@ -1,8 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { lazy, Suspense } from "react";
 import { Phone, ArrowRight, Star, Trophy, Clock, Flame, MapPin, Calendar } from "lucide-react";
-import MultiStepForm from "@/components/MultiStepForm";
-import Faq from "@/components/Faq";
-import Lightbox, { Zoomable } from "@/components/Lightbox";
+import { Zoomable } from "@/components/Lightbox";
+import { Skeleton } from "@/components/ui/skeleton";
+
+const MultiStepForm = lazy(() => import("@/components/MultiStepForm"));
+const Faq = lazy(() => import("@/components/Faq"));
+const Lightbox = lazy(() => import("@/components/Lightbox"));
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -185,7 +189,9 @@ function Home() {
             </p>
           </div>
           <div className="reveal-on-scroll">
-            <MultiStepForm />
+            <Suspense fallback={<Skeleton className="w-full h-[640px] max-w-3xl mx-auto" />}>
+              <MultiStepForm />
+            </Suspense>
           </div>
         </section>
 
@@ -311,7 +317,11 @@ function Home() {
               <p className="eyebrow">Questions fréquentes</p>
               <h2 className="mt-3 text-3xl md:text-5xl">Ce qu'on nous demande souvent.</h2>
             </div>
-            <div className="reveal-on-scroll"><Faq /></div>
+            <div className="reveal-on-scroll">
+              <Suspense fallback={<Skeleton className="w-full h-[420px] max-w-3xl mx-auto" />}>
+                <Faq />
+              </Suspense>
+            </div>
           </div>
         </section>
 
@@ -367,7 +377,9 @@ function Home() {
         </a>
       </div>
 
-      <Lightbox />
+      <Suspense fallback={null}>
+        <Lightbox />
+      </Suspense>
     </>
   );
 
