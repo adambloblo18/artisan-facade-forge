@@ -18,7 +18,7 @@ export default function Lightbox() {
       const list = gallery && gallery.length > 0 ? gallery : [i];
       const idx = list.findIndex((img) => img.src === i.src && img.alt === i.alt);
       setImages(list);
-      setIndex(idx >= 0 ? idx : 1);
+      setIndex(idx >= 0 ? idx : 0);
       try {
         (window as any).posthog?.capture?.("image_zoom", { image_alt: i.alt, image_src: i.src });
       } catch {}
@@ -31,7 +31,7 @@ export default function Lightbox() {
   const goNext = useCallback(() => setIndex((i) => Math.min(images.length - 1, i + 1)), [images.length]);
 
   useEffect(() => {
-    if (index < 1) return;
+    if (index < 0) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") close();
       if (e.key === "ArrowLeft") goPrev();
