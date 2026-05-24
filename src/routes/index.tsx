@@ -9,8 +9,33 @@ const MultiStepForm = lazy(() => import("@/components/MultiStepForm"));
 const Faq = lazy(() => import("@/components/Faq"));
 const Lightbox = lazy(() => import("@/components/Lightbox"));
 
+const professionalServiceLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "Laurence Brecher — Enseignes céramique pour restaurants et hôtels",
+  telephone: "+33670025133",
+  priceRange: "€€€€",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Le Vésinet",
+    postalCode: "78110",
+    addressCountry: "FR",
+  },
+  areaServed: "FR",
+  founder: {
+    "@type": "Person",
+    name: "Laurence Brecher",
+    award: "Prix du Ravalement de Versailles 2024",
+  },
+});
+
 export const Route = createFileRoute("/")({
   component: Home,
+  head: () => ({
+    scripts: [
+      { type: "application/ld+json", children: professionalServiceLd },
+    ],
+  }),
 });
 
 const PHOTOS = {
