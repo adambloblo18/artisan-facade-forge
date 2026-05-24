@@ -62,7 +62,13 @@ posthog.init('phc_oGmkuM4F5je7WmaLZpsF47paa8nv5V5vp58oh74Pwcwy', {
   persistence: 'localStorage+cookie',
   disable_session_recording: false,
   respect_dnt: false,
+  rate_limiting: {
+    events_per_second: 50,
+    events_burst_limit: 500
+  },
   session_recording: {
+    sampleRate: 1.0,
+    minimumDurationMilliseconds: 0,
     maskAllInputs: false,
     maskInputOptions: { password: true, email: false }
   }
