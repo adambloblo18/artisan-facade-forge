@@ -129,6 +129,7 @@ function Home() {
                 fetchPriority="high"
                 width={1920}
                 height={1280}
+                images={REEL}
               />
               <div className="hidden md:block absolute -bottom-6 -left-6 bg-[color:var(--cream)] border border-border px-5 py-4 shadow-lg max-w-[220px]">
                 <div className="flex items-center gap-2 text-[color:var(--gold)]">
@@ -195,6 +196,7 @@ function Home() {
                     src={p.src}
                     alt={p.title}
                     className="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                    images={REEL}
                   />
                 </div>
                 <p className="mt-5 text-xs uppercase tracking-[0.18em] text-[color:var(--gold)]">{p.title}</p>
@@ -244,6 +246,7 @@ function Home() {
                 src={PHOTOS.mosaique}
                 alt="Mosaïque de sol 3m × 3m de Castor Bellux, motif Art Nouveau"
                 className="w-full h-[400px] md:h-[560px] object-cover shadow-[0_30px_60px_-30px_rgba(20,49,59,0.4)]"
+                images={REEL}
               />
             </div>
             <div className="lg:col-span-5 reveal-on-scroll">
@@ -277,6 +280,7 @@ function Home() {
                     src={img.src}
                     alt={img.alt}
                     className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                    images={REEL}
                   />
                 </div>
               ))}
@@ -305,9 +309,9 @@ function Home() {
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-3 reveal-on-scroll">
-                <Zoomable src={PHOTOS.laurence} alt="Laurence Brecher peignant une pièce de céramique" className="w-full h-72 object-cover col-span-2" />
-                <Zoomable src={PHOTOS.atelier} alt="Atelier de céramique au Vésinet" className="w-full h-52 object-cover" />
-                <Zoomable src={PHOTOS.emaux} alt="Palette de 200 émaux préparés à la main" className="w-full h-52 object-cover" />
+                <Zoomable src={PHOTOS.laurence} alt="Laurence Brecher peignant une pièce de céramique" className="w-full h-72 object-cover col-span-2" images={REEL} />
+                <Zoomable src={PHOTOS.atelier} alt="Atelier de céramique au Vésinet" className="w-full h-52 object-cover" images={REEL} />
+                <Zoomable src={PHOTOS.emaux} alt="Palette de 200 émaux préparés à la main" className="w-full h-52 object-cover" images={REEL} />
               </div>
             </div>
           </div>
