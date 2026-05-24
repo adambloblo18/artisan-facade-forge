@@ -190,9 +190,9 @@ function Home() {
             </p>
           </div>
           <div className="reveal-on-scroll">
-            <Suspense fallback={<Skeleton className="w-full h-[640px] max-w-3xl mx-auto" />}>
+            <DeferMount fallback={<Skeleton className="w-full h-[640px] max-w-3xl mx-auto" />}>
               <MultiStepForm />
-            </Suspense>
+            </DeferMount>
           </div>
         </section>
 
@@ -319,9 +319,9 @@ function Home() {
               <h2 className="mt-3 text-3xl md:text-5xl">Ce qu'on nous demande souvent.</h2>
             </div>
             <div className="reveal-on-scroll">
-              <Suspense fallback={<Skeleton className="w-full h-[420px] max-w-3xl mx-auto" />}>
+              <DeferMount fallback={<Skeleton className="w-full h-[420px] max-w-3xl mx-auto" />}>
                 <Faq />
-              </Suspense>
+              </DeferMount>
             </div>
           </div>
         </section>
@@ -378,9 +378,9 @@ function Home() {
         </a>
       </div>
 
-      <Suspense fallback={null}>
+      <DeferMount fallback={null}>
         <Lightbox />
-      </Suspense>
+      </DeferMount>
     </>
   );
 
