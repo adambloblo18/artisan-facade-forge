@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { lazy, Suspense } from "react";
+import { lazy } from "react";
 import { Phone, ArrowRight, Star, Trophy, Clock, Flame, MapPin, Calendar } from "lucide-react";
 import { Zoomable } from "@/components/Lightbox";
 import { Skeleton } from "@/components/ui/skeleton";
+import DeferMount from "@/components/DeferMount";
 
 const MultiStepForm = lazy(() => import("@/components/MultiStepForm"));
 const Faq = lazy(() => import("@/components/Faq"));
