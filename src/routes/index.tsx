@@ -189,7 +189,9 @@ function Home() {
             </p>
           </div>
           <div className="reveal-on-scroll">
-            <MultiStepForm />
+            <Suspense fallback={<Skeleton className="w-full h-[640px] max-w-3xl mx-auto" />}>
+              <MultiStepForm />
+            </Suspense>
           </div>
         </section>
 
