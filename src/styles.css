@@ -115,12 +115,14 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
+    font-synthesis: weight style;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
   h1, h2, h3, h4 {
     font-family: var(--font-serif);
-    font-weight: 400;
+    font-weight: 500;
+    font-synthesis: weight style;
     letter-spacing: -0.01em;
     color: var(--anthracite);
   }
