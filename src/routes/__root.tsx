@@ -181,7 +181,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "manifest", href: "/site.webmanifest" },
       { rel: "shortcut icon", href: "/favicon.ico" },
       { rel: "preload", as: "image", href: "/images/hero-castor.webp", fetchPriority: "high" } as any,
-      { rel: "preload", as: "font", type: "font/woff2", href: "/fonts/dm-sans-400.woff2", crossOrigin: "anonymous" } as any,
+      { rel: "preload", as: "font", type: "font/woff2", href: "/fonts/dm-sans-variable.woff2", crossOrigin: "anonymous" } as any,
       { rel: "preload", as: "font", type: "font/woff2", href: "/fonts/cormorant-garamond-500.woff2", crossOrigin: "anonymous" } as any,
     ],
     scripts: [
