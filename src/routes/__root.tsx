@@ -68,7 +68,7 @@ posthog.init('phc_oGmkuM4F5je7WmaLZpsF47paa8nv5V5vp58oh74Pwcwy', {
   },
   session_recording: {
     sampleRate: 1.0,
-    minimumDurationMilliseconds:  1,
+    minimumDurationMilliseconds: 0,
     maskAllInputs: false,
     maskInputOptions: { password: true, email: false }
   }
