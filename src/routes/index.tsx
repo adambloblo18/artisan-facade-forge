@@ -377,7 +377,9 @@ function Home() {
         </a>
       </div>
 
-      <Lightbox />
+      <Suspense fallback={null}>
+        <Lightbox />
+      </Suspense>
     </>
   );
 
