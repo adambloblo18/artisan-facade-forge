@@ -12,4 +12,27 @@ export default defineConfig({
   tanstackStart: {
     server: { entry: "server" },
   },
+  vite: {
+    build: {
+      target: "es2020",
+      minify: "esbuild",
+      cssMinify: "esbuild",
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (!id.includes("node_modules")) return;
+            if (id.includes("/react/") || id.includes("/react-dom/") || id.includes("/scheduler/")) {
+              return "vendor-react";
+            }
+            if (id.includes("@radix-ui") || id.includes("lucide-react") || id.includes("cmdk") || id.includes("vaul") || id.includes("sonner")) {
+              return "vendor-ui";
+            }
+            if (id.includes("zod") || id.includes("clsx") || id.includes("tailwind-merge") || id.includes("class-variance-authority") || id.includes("date-fns")) {
+              return "vendor-utils";
+            }
+          },
+        },
+      },
+    },
+  },
 });
