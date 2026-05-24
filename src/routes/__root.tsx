@@ -180,14 +180,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
       { rel: "manifest", href: "/site.webmanifest" },
       { rel: "shortcut icon", href: "/favicon.ico" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "preload", as: "image", href: "/images/hero-castor.webp", fetchPriority: "high" } as any,
-      {
-        rel: "stylesheet",
-        href:
-          "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap",
-      },
+      { rel: "preload", as: "font", type: "font/woff2", href: "/fonts/dm-sans-400.woff2", crossOrigin: "anonymous" } as any,
+      { rel: "preload", as: "font", type: "font/woff2", href: "/fonts/cormorant-garamond-500.woff2", crossOrigin: "anonymous" } as any,
     ],
     scripts: [
       { children: consentScript },
