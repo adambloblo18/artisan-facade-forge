@@ -9,20 +9,20 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as Googleb6633cba44aa57ecDothtmlRouteImport } from './routes/googleb6633cba44aa57ec[.]html'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as Googleb6633cba44aa57ecDothtmlRouteImport } from './routes/googleb6633cba44aa57ec[.]html'
 
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const Googleb6633cba44aa57ecDothtmlRoute =
   Googleb6633cba44aa57ecDothtmlRouteImport.update({
     id: '/googleb6633cba44aa57ec.html',
     path: '/googleb6633cba44aa57ec.html',
     getParentRoute: () => rootRouteImport,
   } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -52,18 +52,18 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/googleb6633cba44aa57ec.html': {
-      id: '/googleb6633cba44aa57ec.html'
-      path: '/googleb6633cba44aa57ec.html'
-      fullPath: '/googleb6633cba44aa57ec.html'
-      preLoaderRoute: typeof Googleb6633cba44aa57ecDothtmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/googleb6633cba44aa57ec.html': {
+      id: '/googleb6633cba44aa57ec.html'
+      path: '/googleb6633cba44aa57ec.html'
+      fullPath: '/googleb6633cba44aa57ec.html'
+      preLoaderRoute: typeof Googleb6633cba44aa57ecDothtmlRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
