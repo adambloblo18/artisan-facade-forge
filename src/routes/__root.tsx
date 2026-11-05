@@ -143,7 +143,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Enseignes et décors céramique sur mesure pour restaurants, hôtels et architectes. Prix du Ravalement Versailles 2025. Réponse en 20 minutes.",
       },
-      { name: "robots", content: "index, follow" },
+      { name: "robots", content: "noindex, follow" },
       { name: "theme-color", content: "#C1583E" },
       { name: "apple-mobile-web-app-title", content: "Céramique Murale Brecher" },
       { name: "application-name", content: "Céramique Murale Brecher" },
