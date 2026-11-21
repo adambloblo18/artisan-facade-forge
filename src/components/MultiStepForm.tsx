@@ -79,9 +79,6 @@ export default function MultiStepForm() {
       return;
     }
 
-    const parts = values.nom.trim().split(/\s+/);
-    const firstname = parts[0] || values.nom;
-    const lastname = parts.slice(1).join(" ") || "";
     const timestamp = Date.now();
 
     try {
@@ -134,10 +131,6 @@ export default function MultiStepForm() {
       if (result.success !== true) throw new Error(result.message || "submit failed");
 
       const params = new URLSearchParams({
-        email: values.email,
-        phone: values.telephone || "",
-        fn: firstname,
-        ln: lastname,
         value: "500",
         tx: `LEAD-${timestamp}`,
       });
@@ -160,13 +153,14 @@ export default function MultiStepForm() {
       window.location.href = `${REDIRECT_BASE}?${params.toString()}`;
     } catch (err) {
       console.error("[MultiStepForm] Submit error:", err);
-      setSubmitError("Une erreur est survenue. Merci de réessayer ou d'appeler le 06 70 02 51 33.");
+      setSubmitError("Une erreur est survenue. Merci de réessayer ou de nous appeler.");
     }
   };
 
   const inputCls = "mt-2 w-full rounded-sm border border-border bg-white px-3 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-[color:var(--gold)]";
 
   return (
+    <>
     <form
       id="contact-form"
       onSubmit={handleSubmit(onSubmit, (errs) => {
@@ -358,8 +352,12 @@ export default function MultiStepForm() {
       </div>
 
       <p className="text-xs text-muted-foreground text-center mt-5">
-        Réponse en 20 minutes pendant les heures ouvrées, gratuit, sans engagement.
+        Réponse en 20 minutes pendant les heures ouvrées, sans engagement.
       </p>
     </form>
+    <p className="text-xs text-muted-foreground text-center mt-5">
+      <a href="tel:+33670025133">06 70 02 51 33</a>
+    </p>
+    </>
   );
 }

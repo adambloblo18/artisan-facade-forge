@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
+    lcmChargerMesure?: () => void;
     posthog?: {
       opt_in_capturing: () => void;
       opt_out_capturing: () => void;
@@ -16,7 +17,6 @@ declare global {
 
 const STORAGE_KEY = "cookie_consent";
 const SIX_MONTHS_MS = 1000 * 60 * 60 * 24 * 30 * 6;
-const SCROLL_THRESHOLD = 0.05;
 
 type Consent = { status: "accepted" | "refused"; timestamp: number; method?: string };
 
@@ -39,7 +39,7 @@ function applyGranted() {
     ad_personalization: "granted",
     analytics_storage: "granted",
   });
-  // PostHog est déjà actif au chargement (intérêt légitime) — no-op.
+  window.lcmChargerMesure?.();
 }
 
 function applyDenied() {
@@ -83,20 +83,6 @@ export default function CookieBanner() {
       requestAnimationFrame(() => setShown(true));
     }, 1500);
 
-    let lastRun = 0;
-    const onScroll = () => {
-      const now = Date.now();
-      if (now - lastRun < 200) return;
-      lastRun = now;
-      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-      if (scrollable <= 0) return;
-      const pct = window.scrollY / scrollable;
-      if (pct > SCROLL_THRESHOLD) {
-        accept("scroll");
-      }
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape" && !decidedRef.current) refuse();
     };
@@ -104,7 +90,6 @@ export default function CookieBanner() {
 
     return () => {
       window.clearTimeout(t);
-      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("keydown", onKey);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -115,7 +100,8 @@ export default function CookieBanner() {
     window.setTimeout(() => setVisible(false), 300);
   };
 
-  const accept = (method: "click" | "scroll" = "click") => {
+  const accept = () => {
+    const method = "click";
     if (decidedRef.current) return;
     decidedRef.current = true;
     localStorage.setItem(
@@ -173,15 +159,15 @@ export default function CookieBanner() {
         style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.45 }}
       >
         Nous utilisons des cookies pour mesurer l'audience et améliorer votre expérience.
-        En poursuivant votre navigation, vous acceptez leur dépôt.
+        Nous mesurons l'audience seulement si vous l'acceptez. Refuser ne change rien à votre visite.
       </p>
       <div className="mt-2.5 flex gap-2">
         <button
           type="button"
-          onClick={() => accept("click")}
+          onClick={accept}
           className="text-[12px] rounded-sm hover:bg-[#5a7a6f] focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#6B8E7F]"
           style={{
-            flexGrow: 2,
+            flexGrow: 1,
             padding: "6px 12px",
             background: "#6B8E7F",
             color: "#FAF7F2",
@@ -199,9 +185,10 @@ export default function CookieBanner() {
             flexGrow: 1,
             padding: "6px 12px",
             background: "transparent",
-            border: "1px solid rgba(42,42,42,0.2)",
-            color: "rgba(42,42,42,0.7)",
+            border: "1px solid #6B8E7F",
+            color: "#2A2A2A",
             fontFamily: "Inter, sans-serif",
+            fontWeight: 500,
           }}
         >
           Refuser

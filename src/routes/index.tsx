@@ -63,7 +63,7 @@ function Home() {
     <>
       {/* Bandeau urgence */}
       <div className="bg-[color:var(--anthracite)] text-[color:var(--cream)]/90 text-xs md:text-sm py-2 text-center container-px">
-        <span className="font-medium">Capacité atelier 2026 : 6 projets restants.</span>
+        <span className="font-medium">Atelier au Vésinet.</span>
         <span className="hidden sm:inline"> Réponse en 20 minutes pendant les heures ouvrées.</span>
       </div>
 
@@ -74,7 +74,7 @@ function Home() {
             <div className="w-10 h-10 rounded-full bg-[color:var(--anthracite)] text-[color:var(--cream)] grid place-items-center font-serif text-lg">LB</div>
             <div className="leading-tight">
               <div className="font-serif text-base md:text-lg text-[color:var(--anthracite)]">Laurence Brecher</div>
-              <div className="text-[10px] md:text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Céramique architecturale · depuis 2002</div>
+              <div className="text-[10px] md:text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Céramique architecturale</div>
             </div>
           </a>
           <nav className="flex items-center gap-2 md:gap-4">
@@ -97,8 +97,7 @@ function Home() {
         <section className="container-px max-w-7xl mx-auto pt-12 md:pt-20 pb-16 md:pb-24 grid lg:grid-cols-12 gap-10 items-center">
           <div className="order-2 lg:order-1 lg:col-span-6 reveal-on-scroll">
             <div className="inline-flex items-center gap-2 text-xs text-foreground/70 border border-border bg-white/60 rounded-full px-3 py-1.5">
-              <span className="text-[color:var(--gold)]">★★★★★</span>
-              <span>5,0 sur Google</span>
+              <a href="https://www.google.com/maps?cid=11909113535381793074" target="_blank" rel="noopener">Avis Google : 5,0 sur 5, 19 avis (relevé du 21 novembre 2026)</a>
               <span className="opacity-40">·</span>
               <span>Prix du Ravalement Versailles 2025</span>
             </div>
@@ -146,10 +145,10 @@ function Home() {
         <section className="border-y border-border bg-white/60">
           <div className="container-px max-w-7xl mx-auto py-10 grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { icon: Calendar, label: "20+ ans d'atelier au Vésinet" },
-              { icon: Flame, label: "1 220°C grès ingélif, tient le gel" },
+              { icon: Calendar, label: "Atelier au Vésinet depuis 2008" },
+              { icon: Flame, label: "Émaillé à la main, cuit au grand feu" },
               { icon: Clock, label: "1h estimation par email (jours ouvrés)" },
-              { icon: Star, label: "Capacité 2026 limitée" },
+              { icon: Star, label: "Premier Prix du Ravalement, Versailles 2025" },
             ].map((s, i) => (
               <div key={i} className="flex items-start gap-3">
                 <s.icon className="h-5 w-5 text-[color:var(--gold)] mt-1" aria-hidden />
@@ -165,8 +164,7 @@ function Home() {
             <p className="eyebrow">Réalisations</p>
             <h2 className="text-3xl md:text-5xl mt-3 text-balance">Trois projets, trois ambiances.</h2>
             <p className="mt-4 text-foreground/70">
-              Façade de restaurant qui attire, médaillons Art Nouveau qui évoquent Mucha, fresque provençale qui tient
-              depuis 10 ans au mistral.
+              Façade de restaurant qui attire, médaillons Art Nouveau qui évoquent Mucha, panneau fleuri pour une ferme de la Drôme.
             </p>
           </div>
           <div className="mt-12 grid md:grid-cols-3 gap-6">
@@ -181,13 +179,13 @@ function Home() {
                 src: PHOTOS.halle,
                 title: "La Halle, Marly-Gomont",
                 lead: "Trois médaillons inspirés de Mucha",
-                body: "Médaillons ovales d'un mètre peints un à un, cuits à 1 220°C, posés sur vert sapin.",
+                body: "Médaillons ovales d'un mètre peints un à un, cuits au grand feu, posés sur vert sapin.",
               },
               {
                 src: PHOTOS.jouvette,
                 title: "Ferme la Jouvette, Drôme",
-                lead: "10 ans au mistral, sans altération",
-                body: "Panneau horizontal bleu nuit, constellé de fleurs et papillons. Les couleurs tiennent depuis une décennie.",
+                lead: "Un panneau fleuri au-dessus de la porte",
+                body: "Panneau horizontal bleu nuit, constellé de fleurs et papillons, peint à la main et cuit au feu.",
               },
             ].map((p, i) => (
               <article key={i} className="group reveal-on-scroll">
@@ -210,7 +208,7 @@ function Home() {
         {/* FORMULAIRE */}
         <section id="contact" className="container-px max-w-7xl mx-auto py-20 md:py-28">
           <div className="text-center max-w-2xl mx-auto mb-10 reveal-on-scroll">
-            <p className="eyebrow">Estimation gratuite</p>
+            <p className="eyebrow">Votre projet</p>
             <h2 className="text-3xl md:text-5xl mt-3">Parlons de votre projet</h2>
             <p className="mt-4 text-foreground/70">
               4 champs, 30 secondes. Estimation par email en 1 heure (jours ouvrés).
@@ -229,11 +227,10 @@ function Home() {
           <div className="container-px max-w-4xl mx-auto py-20 md:py-28 text-center reveal-on-scroll">
             <Trophy className="h-10 w-10 text-[color:var(--gold)] mx-auto" />
             <p className="mt-6 font-serif italic text-2xl md:text-3xl leading-snug text-balance">
-              « Une intervention exemplaire qui redonne vie au patrimoine céramique versaillais
-              avec une maîtrise technique et une sensibilité artistique remarquables. »
+              Premier Prix du Ravalement de la Ville de Versailles 2025, catégorie Restitution de Décors.
             </p>
             <p className="mt-6 text-sm uppercase tracking-[0.2em] text-[color:var(--cream)]/60">
-              Jury du Prix du Ravalement · Ville de Versailles · Édition 2025
+              Ville de Versailles · Édition 2025
             </p>
           </div>
         </section>
@@ -255,9 +252,7 @@ function Home() {
                 Le sol comme signature : la mosaïque Castor Bellux.
               </h2>
               <p className="mt-6 text-foreground/80 leading-relaxed">
-                Sous le seuil d'entrée du restaurant Castor Bellux, une mosaïque de 3 m × 3 m accueille chaque convive.
-                Tesselles de grès ingélif assemblées une à une, motif inspiré des sols Art Nouveau bruxellois du début du
-                XXe siècle. Résistance au trafic intense, au lavage haute pression, à l'usure du temps.
+                Dans l'entrée du restaurant Castor Bellux, à Dinard, une mosaïque de 3 m sur 3 m accueille chaque convive. Tesselles de céramique émaillée, assemblées une à une à l'atelier.
               </p>
               <a href="#realisations" className="btn-ghost mt-8">
                 Voir d'autres projets de sol <ArrowRight className="h-4 w-4" />
@@ -270,7 +265,6 @@ function Home() {
         <section className="py-20 md:py-24">
           <div className="container-px max-w-7xl mx-auto text-center reveal-on-scroll">
             <p className="eyebrow">Atelier</p>
-            <h2 className="mt-3 text-3xl md:text-5xl">Une centaine de projets, depuis 2002.</h2>
           </div>
           <div className="marquee-wrap mt-12 overflow-hidden">
             <div className="marquee">
@@ -298,10 +292,9 @@ function Home() {
                   Tout se fait ici. Aucune sous-traitance.
                 </h2>
                 <p className="mt-6 text-[color:var(--cream)]/80 leading-relaxed">
-                  Laurence peint, émaille et cuit chaque pièce dans son atelier du Vésinet. Formée à l'École Duperré, dans
+                  Laurence peint, émaille et cuit chaque pièce dans son atelier du Vésinet. Formée à l'Académie de Port-Royal et aux Beaux-Arts de Paris, dans
                   la filiation esthétique de l'Art Nouveau (Guimard, Gallé, École de Nancy), elle travaille le grès et la
-                  faïence depuis plus de vingt ans. Sa palette de 200 émaux préparés à la cendre et au feldspath permet de
-                  composer des tons qu'aucun catalogue industriel ne saura reproduire.
+                  faïence depuis trente ans.
                 </p>
                 <div className="mt-8 inline-flex items-center gap-2 text-sm text-[color:var(--cream)]/70">
                   <MapPin className="h-4 w-4 text-[color:var(--gold)]" />
@@ -327,7 +320,7 @@ function Home() {
             {[
               { n: "01", t: "Premier échange", d: "1h", body: "Photos, dimensions, style, timing. Vérification de faisabilité et retour rapide." },
               { n: "02", t: "Maquette et devis", d: "1 à 2 semaines", body: "Esquisse, palette, format et prix détaillé avant toute mise en production." },
-              { n: "03", t: "Fabrication atelier", d: "4 à 8 semaines", body: "Modelage, peinture, émaillage puis cuisson à 1 220°C. Chaque pièce est numérotée." },
+              { n: "03", t: "Fabrication atelier", d: "4 à 8 semaines", body: "Modelage, peinture, émaillage puis cuisson au grand feu. Chaque pièce est numérotée." },
               { n: "04", t: "Livraison et pose", d: "1 semaine", body: "Conditionnement sur palette avec notice de pose. Accompagnement possible du poseur." },
             ].map((p) => (
               <li key={p.n} className="reveal-on-scroll border-t-2 border-[color:var(--gold)] pt-5">
@@ -357,10 +350,6 @@ function Home() {
 
         {/* CTA FINAL */}
         <section className="container-px max-w-7xl mx-auto py-20 md:py-28 text-center">
-          <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-[color:var(--gold)] border border-[color:var(--gold)]/40 bg-[color:var(--gold)]/5 px-4 py-2 rounded-full">
-            <span className="w-1.5 h-1.5 rounded-full bg-[color:var(--gold)]" />
-            6 projets restants en 2026
-          </div>
           <h2 className="mt-6 text-3xl md:text-5xl text-balance max-w-3xl mx-auto">
             Prêt à donner une signature à votre lieu ?
           </h2>

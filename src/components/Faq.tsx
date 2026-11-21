@@ -4,11 +4,11 @@ import { Plus, Minus } from "lucide-react";
 const FAQ = [
   {
     q: "Quel budget prévoir ?",
-    a: "Panneau d'enseigne à partir de 1 500€. Décor de devanture type Castor Bellux : 8 000 à 15 000€. Façade complète type Mucha (18 m²) : au-delà de 20 000€. Estimation gratuite en 1 heure, jours ouvrés.",
+    a: "Panneau d'enseigne à partir de 1 500€. Décor de devanture type Castor Bellux : 8 000 à 15 000€. Façade complète type Mucha (18 m²) : au-delà de 20 000€. Votre projet en 1 heure, jours ouvrés.",
   },
   {
-    q: "Est-ce adapté à l'extérieur ?",
-    a: "Oui. Le grès ingélif cuit à 1 220°C orne les façades Art Nouveau parisiennes depuis plus d'un siècle. La Ferme la Jouvette : 10+ ans au soleil, au mistral et au gel, sans altération.",
+    q: "Comment se pose une enseigne en céramique en façade ?",
+    a: "Comme un carrelage, sur un mur sain et plan : votre maçon pose les carreaux au mortier-colle, avec la fiche technique et le plan de calepinage que nous fournissons. Les pièces sont peintes et émaillées à la main, puis cuites au grand feu.",
   },
   {
     q: "Travaillez-vous avec des architectes ?",
