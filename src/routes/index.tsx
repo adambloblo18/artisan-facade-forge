@@ -106,8 +106,7 @@ function Home() {
               <em className="not-italic font-serif italic text-[color:var(--gold)]">restaurant.</em>
             </h1>
             <p className="mt-6 text-lg text-foreground/75 max-w-xl leading-relaxed">
-              Pour restaurants, hôtels et architectes qui veulent une identité visuelle mémorable.
-              Peint à la main dans notre atelier du Vésinet.
+              Pour les restaurants, les hôtels et leurs architectes : chaque enseigne est dessinée, émaillée et cuite dans notre atelier du Vésinet.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <a href="#contact" className="btn-primary">
@@ -356,7 +355,7 @@ function Home() {
             Prêt à donner une signature à votre lieu ?
           </h2>
           <p className="mt-5 text-foreground/75 max-w-xl mx-auto">
-            Quatre étapes courtes. Vous obtenez une première estimation par email en 1 heure (jours ouvrés), sans
+            Un formulaire en quatre étapes courtes : vous obtenez une première estimation par email en 1 heure (jours ouvrés), sans
             engagement.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">

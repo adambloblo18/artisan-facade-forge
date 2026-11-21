@@ -316,7 +316,7 @@ export default function MultiStepForm() {
           </div>
           <label className="flex items-start gap-2 text-sm">
             <input type="checkbox" {...register("rgpd")} className="mt-1 accent-[color:var(--gold)]" />
-            <span>J'accepte d'être recontacté(e) par l'atelier au sujet de mon projet. Mes données ne seront jamais transmises à des tiers.</span>
+            <span>J'accepte d'être recontacté(e) par l'atelier au sujet de mon projet. Mes données servent uniquement à répondre à ma demande.</span>
           </label>
           {errors.rgpd && <p className="text-sm text-destructive">{errors.rgpd.message as string}</p>}
           {submitError && <p role="alert" className="text-sm text-destructive">{submitError}</p>}

@@ -133,7 +133,7 @@ export default function CookieBanner() {
       role="dialog"
       aria-labelledby="cookie-title"
       aria-describedby="cookie-desc"
-      className="fixed z-[1000] bg-[#FAF7F2] border border-[#D4A89B] rounded-sm p-3 font-sans sm:p-2.5 max-md:[--cookie-bottom:calc(84px+env(safe-area-inset-bottom))]"
+      className="fixed z-[1000] bg-[#FAF7F2] border border-[#D4A89B] rounded-sm p-3 font-sans sm:p-2.5 max-lg:[--cookie-bottom:calc(84px+env(safe-area-inset-bottom))]"
       style={{
         bottom: "var(--cookie-bottom, 12px)",
         right: 8,
