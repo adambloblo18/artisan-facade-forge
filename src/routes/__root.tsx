@@ -78,7 +78,7 @@ posthog.init('phc_oGmkuM4F5je7WmaLZpsF47paa8nv5V5vp58oh74Pwcwy', {
 
 const localBusinessLd = JSON.stringify({
   "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "Store"],
+  "@type": "LocalBusiness",
   name: "Les Céramiques Murales du Vésinet",
   url: "https://www.ceramique-murale.com/",
   telephone: "+33670025133",
@@ -93,14 +93,6 @@ const localBusinessLd = JSON.stringify({
   founder: { "@type": "Person", name: "Laurence Brecher" },
   award:
     "Premier Prix du Ravalement de la Ville de Versailles 2025, catégorie Restitution de Décors",
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-      opens: "09:00",
-      closes: "18:00",
-    },
-  ],
 });
 
 function NotFoundComponent() {
@@ -152,7 +144,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "fr_FR" },
       { property: "og:site_name", content: "Laurence Brecher · Céramique architecturale" },
-      { property: "og:title", content: "Une façade qui transforme les passants en clients | Laurence Brecher" },
+      { property: "og:title", content: "Enseignes en céramique peintes à la main pour restaurants | Laurence Brecher" },
       {
         property: "og:description",
         content:
@@ -164,7 +156,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "https://www.ceramique-murale.com/wp-content/uploads/2023/09/6E2BE403-A759-44F8-B5C1-29F488515E32.jpeg",
       },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Une façade qui transforme les passants en clients | Laurence Brecher" },
+      { name: "twitter:title", content: "Enseignes en céramique peintes à la main pour restaurants | Laurence Brecher" },
       {
         name: "twitter:description",
         content: "Céramique architecturale pour restaurants, hôtels et architectes.",
@@ -220,21 +212,6 @@ function RootComponent() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-
-    try {
-      const url = new URL(window.location.href);
-      const adParams = ["gclid", "wbraid", "gbraid", "msclkid", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
-      adParams.forEach((key) => {
-        const val = url.searchParams.get(key);
-        if (val) sessionStorage.setItem(`lcm_${key}`, val);
-      });
-      if (!sessionStorage.getItem("lcm_landing")) {
-        sessionStorage.setItem("lcm_landing", window.location.href);
-      }
-      if (!sessionStorage.getItem("lcm_referrer") && document.referrer) {
-        sessionStorage.setItem("lcm_referrer", document.referrer);
-      }
-    } catch {}
 
     document.documentElement.classList.add("js-ready");
     if (!("IntersectionObserver" in window)) {

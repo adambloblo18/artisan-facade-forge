@@ -102,8 +102,8 @@ function Home() {
               <span>Prix du Ravalement Versailles 2025</span>
             </div>
             <h1 className="mt-6 text-[2.4rem] md:text-[3.6rem] leading-[1.04] text-balance">
-              Une enseigne céramique qui transforme les passants en{" "}
-              <em className="not-italic font-serif italic text-[color:var(--gold)]">clients.</em>
+              Une enseigne en céramique, peinte à la main pour votre{" "}
+              <em className="not-italic font-serif italic text-[color:var(--gold)]">restaurant.</em>
             </h1>
             <p className="mt-6 text-lg text-foreground/75 max-w-xl leading-relaxed">
               Pour restaurants, hôtels et architectes qui veulent une identité visuelle mémorable.
@@ -143,6 +143,7 @@ function Home() {
 
         {/* PREUVES */}
         <section className="border-y border-border bg-white/60">
+          <h2 className="sr-only">L'atelier en bref</h2>
           <div className="container-px max-w-7xl mx-auto py-10 grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
               { icon: Calendar, label: "Atelier au Vésinet depuis 2008" },
@@ -164,7 +165,7 @@ function Home() {
             <p className="eyebrow">Réalisations</p>
             <h2 className="text-3xl md:text-5xl mt-3 text-balance">Trois projets, trois ambiances.</h2>
             <p className="mt-4 text-foreground/70">
-              Façade de restaurant qui attire, médaillons Art Nouveau qui évoquent Mucha, panneau fleuri pour une ferme de la Drôme.
+              Une devanture de restaurant à Dinard, des médaillons Art Nouveau inspirés de Mucha, un panneau fleuri pour une ferme de la Drôme.
             </p>
           </div>
           <div className="mt-12 grid md:grid-cols-3 gap-6">
@@ -172,7 +173,7 @@ function Home() {
               {
                 src: PHOTOS.hero,
                 title: "Castor Bellux, Dinard",
-                lead: "Une façade devenue signature du quartier",
+                lead: "Une devanture et une mosaïque d'entrée",
                 body: "Quatre panneaux peints à la main, bleu nuit et rouge bordeaux, mosaïque de sol de 3 m × 3 m à l'entrée.",
               },
               {
@@ -211,7 +212,7 @@ function Home() {
             <p className="eyebrow">Votre projet</p>
             <h2 className="text-3xl md:text-5xl mt-3">Parlons de votre projet</h2>
             <p className="mt-4 text-foreground/70">
-              4 champs, 30 secondes. Estimation par email en 1 heure (jours ouvrés).
+              Quatre étapes courtes. Première estimation par email en 1 heure (jours ouvrés).
             </p>
           </div>
           <div className="reveal-on-scroll">
@@ -224,6 +225,7 @@ function Home() {
 
         {/* CITATION JURY */}
         <section className="bg-[color:var(--anthracite)] text-[color:var(--cream)]">
+          <h2 className="sr-only">Distinction de l'atelier</h2>
           <div className="container-px max-w-4xl mx-auto py-20 md:py-28 text-center reveal-on-scroll">
             <Trophy className="h-10 w-10 text-[color:var(--gold)] mx-auto" />
             <p className="mt-6 font-serif italic text-2xl md:text-3xl leading-snug text-balance">
@@ -255,7 +257,7 @@ function Home() {
                 Dans l'entrée du restaurant Castor Bellux, à Dinard, une mosaïque de 3 m sur 3 m accueille chaque convive. Tesselles de céramique émaillée, assemblées une à une à l'atelier.
               </p>
               <a href="#realisations" className="btn-ghost mt-8">
-                Voir d'autres projets de sol <ArrowRight className="h-4 w-4" />
+                Voir les réalisations <ArrowRight className="h-4 w-4" />
               </a>
             </div>
           </div>
@@ -294,8 +296,7 @@ function Home() {
                 </h2>
                 <p className="mt-6 text-[color:var(--cream)]/80 leading-relaxed">
                   Laurence peint, émaille et cuit chaque pièce dans son atelier du Vésinet. Formée à l'Académie de Port-Royal et aux Beaux-Arts de Paris, dans
-                  la filiation esthétique de l'Art Nouveau (Guimard, Gallé, École de Nancy), elle travaille le grès et la
-                  faïence depuis trente ans.
+                  la filiation esthétique de l'Art Nouveau (Guimard, Gallé, École de Nancy), elle travaille la faïence émaillée depuis trente ans.
                 </p>
                 <div className="mt-8 inline-flex items-center gap-2 text-sm text-[color:var(--cream)]/70">
                   <MapPin className="h-4 w-4 text-[color:var(--gold)]" />
@@ -355,7 +356,7 @@ function Home() {
             Prêt à donner une signature à votre lieu ?
           </h2>
           <p className="mt-5 text-foreground/75 max-w-xl mx-auto">
-            Quatre champs, 30 secondes. Vous obtenez une première estimation par email en 1 heure (jours ouvrés), sans
+            Quatre étapes courtes. Vous obtenez une première estimation par email en 1 heure (jours ouvrés), sans
             engagement.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">

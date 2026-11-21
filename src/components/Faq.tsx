@@ -8,11 +8,11 @@ const FAQ = [
   },
   {
     q: "Comment se pose une enseigne en céramique en façade ?",
-    a: "Comme un carrelage, sur un mur sain et plan : votre maçon pose les carreaux au mortier-colle, avec la fiche technique et le plan de calepinage que nous fournissons. Les pièces sont peintes et émaillées à la main, puis cuites au grand feu.",
+    a: "Sur un mur sain et plan, votre maçon pose les carreaux au mortier-colle, avec la fiche technique et le plan de calepinage que nous fournissons.",
   },
   {
     q: "Travaillez-vous avec des architectes ?",
-    a: "Oui. NDA signés, plaquettes d'émaux, fiches techniques et PV feu disponibles sur demande. Commission prescripteur définie clairement sur devis signé.",
+    a: "Oui. Accord de confidentialité si besoin, plaquettes d'émaux et fiches techniques sur demande. Commission prescripteur définie clairement sur devis signé.",
   },
   {
     q: "Quels délais pour un projet ?",

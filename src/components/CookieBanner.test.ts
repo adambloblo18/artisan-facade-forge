@@ -2,6 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
+import { transpileModule, ScriptTarget } from "typescript";
 
 const rootSource = readFileSync(new URL("../routes/__root.tsx", import.meta.url), "utf8");
 const bannerSource = readFileSync(new URL("./CookieBanner.tsx", import.meta.url), "utf8");
@@ -126,4 +127,61 @@ test("thank-you URL retains value and transaction but no contact details", () =>
   assert.equal(params.get("value"), "500");
   assert.equal(params.get("tx"), "LEAD-123456789");
   for (const key of ["email", "phone", "fn", "ln"]) assert.equal(params.has(key), false);
+});
+
+test("initial page setup does not persist advertising or navigation data", () => {
+  const effect = rootSource.split("function RootComponent()")[1]?.match(/useEffect\(\(\) => \{([\s\S]*?)\n  \}, \[\]\);/)?.[1];
+  if (!effect) throw new Error("Missing initial page setup");
+  const writes: unknown[] = [];
+  runInNewContext(`(() => {${effect}})()`, {
+    window: { location: { href: "https://example.com/?gclid=click-123&utm_source=google" } },
+    document: {
+      referrer: "https://example.org/",
+      documentElement: { classList: { add: () => {} } },
+      querySelectorAll: () => [],
+    },
+    sessionStorage: { getItem: () => null, setItem: (...args: unknown[]) => writes.push(args) },
+    localStorage: { setItem: (...args: unknown[]) => writes.push(args) },
+  });
+  assert.deepEqual(writes, []);
+});
+
+test("submission reads attribution and navigation directly without storing contact details", async () => {
+  const body = formSource.match(/const onSubmit = async \(values: FormValues\) => \{([\s\S]*?)\n  \};/)?.[1];
+  if (!body) throw new Error("Missing submit handler");
+  const writes: unknown[] = [];
+  const logs: unknown[] = [];
+  let payload: Record<string, unknown> = {};
+  const href = "https://example.com/?gclid=click-123&utm_source=google&utm_medium=cpc&utm_campaign=restaurant&utm_term=enseigne&utm_content=photo&wbraid=wb&gbraid=gb&msclkid=ms";
+  const context = {
+    window: { location: { href, search: new URL(href).search } },
+    document: { referrer: "https://example.org/restaurant" },
+    URLSearchParams,
+    Date: { now: () => 123456789 },
+    mountedAt: { current: 0 },
+    setSubmitError: () => {},
+    WEB3FORMS_ENDPOINT: "https://api.web3forms.com/submit",
+    WEB3FORMS_ACCESS_KEY: "test-key",
+    REDIRECT_BASE: "https://example.com/merci/",
+    console: { log: (...args: unknown[]) => logs.push(args), warn: () => {}, error: () => {} },
+    sessionStorage: { getItem: () => "stale-value", setItem: (...args: unknown[]) => writes.push(args) },
+    fetch: async (_url: string, options: { body: string }) => {
+      payload = JSON.parse(options.body) as Record<string, unknown>;
+      return { json: async () => ({ success: true }) };
+    },
+  };
+  const js = transpileModule(`(async (values: unknown) => {${body}})`, {
+    compilerOptions: { target: ScriptTarget.ES2022 },
+  }).outputText;
+  const submit = runInNewContext(js, context) as (values: Record<string, unknown>) => Promise<void>;
+  await submit({ nom: "Test", email: "test@example.com", telephone: "0600000000", type: "enseigne", taille: "petit", delai: "explore", botcheck: "" });
+  assert.deepEqual(writes, []);
+  assert.deepEqual(logs, []);
+  for (const [key, value] of new URL(href).searchParams) assert.equal(payload[key], value);
+  assert.equal(payload["landing"], href);
+  assert.equal(payload["referrer"], "https://example.org/restaurant");
+  assert.equal(payload["email"], "test@example.com");
+  const redirect = new URL(context.window.location.href);
+  assert.equal(redirect.searchParams.get("gclid"), "click-123");
+  assert.equal(redirect.searchParams.has("email"), false);
 });

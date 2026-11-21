@@ -82,23 +82,12 @@ export default function MultiStepForm() {
     const timestamp = Date.now();
 
     try {
-      if (typeof window !== "undefined") {
-        sessionStorage.setItem("lcm_email", values.email);
-        sessionStorage.setItem("lcm_phone", values.telephone);
-      }
-    } catch {}
-
-    try {
-      console.log("[MultiStepForm] Submitting to Web3Forms", {
-        email: values.email,
-        type: values.type,
-      });
-
-      // Récupération des paramètres pub/UTM depuis sessionStorage pour le mail
+      // Lecture des paramètres publicitaires au moment de l'envoi, sans stockage.
       const adParamKeys = ["gclid", "wbraid", "gbraid", "msclkid", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
+      const searchParams = new URLSearchParams(window.location.search);
       const adData: Record<string, string> = {};
       adParamKeys.forEach((key) => {
-        const val = typeof window !== "undefined" ? sessionStorage.getItem(`lcm_${key}`) : null;
+        const val = searchParams.get(key);
         if (val) adData[key] = val;
       });
 
@@ -122,6 +111,8 @@ export default function MultiStepForm() {
           budget: values.taille,
           echeance: values.delai,
           ...adData,
+          landing: window.location.href,
+          referrer: document.referrer,
           botcheck: values.botcheck || "",
         }),
       });
@@ -135,9 +126,8 @@ export default function MultiStepForm() {
         tx: `LEAD-${timestamp}`,
       });
 
-      const adParams = ["gclid", "wbraid", "gbraid", "msclkid", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
-      adParams.forEach((key) => {
-        const val = sessionStorage.getItem(`lcm_${key}`);
+      adParamKeys.forEach((key) => {
+        const val = adData[key];
         if (val) params.set(key, val);
       });
 
