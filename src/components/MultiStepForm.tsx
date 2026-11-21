@@ -331,11 +331,11 @@ export default function MultiStepForm() {
         ) : <span />}
 
         {step < 4 ? (
-          <button type="button" onClick={next} className="btn-primary">
+          <button key="next-step" type="button" onClick={next} className="btn-primary">
             Continuer <ArrowRight className="h-4 w-4" />
           </button>
         ) : (
-          <button type="submit" disabled={isSubmitting} className="btn-primary disabled:opacity-60">
+          <button key="submit-request" type="submit" disabled={isSubmitting} className="btn-primary disabled:opacity-60">
             {isSubmitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <>Envoyer ma demande <ArrowRight className="h-4 w-4" /></>}
           </button>
         )}

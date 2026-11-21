@@ -5,6 +5,7 @@ import { runInNewContext } from "node:vm";
 import { transpileModule, ScriptTarget } from "typescript";
 
 const rootSource = readFileSync(new URL("../routes/__root.tsx", import.meta.url), "utf8");
+const indexSource = readFileSync(new URL("../routes/index.tsx", import.meta.url), "utf8");
 const bannerSource = readFileSync(new URL("./CookieBanner.tsx", import.meta.url), "utf8");
 const formSource = readFileSync(new URL("./MultiStepForm.tsx", import.meta.url), "utf8");
 const lifetime = 15552000000;
@@ -40,28 +41,27 @@ test("no audience loader runs without an accepted choice", () => {
   for (const name of ["uetScript", "clarityScript", "posthogScript"]) {
     runInNewContext(script(name), env.context);
   }
-  assert.equal(env.timers.length, 0);
+  assert.deepEqual(env.timers.map((timer) => timer.delay), [1000]);
   assert.equal((env.window["lcmChargeurs"] as unknown[]).length, 3);
   assert.equal(env.window["posthog"], undefined);
   assert.equal(env.window["clarity"], undefined);
   assert.equal(env.window["uetq"], undefined);
-  assert.equal(env.inserted.length, 1);
-  assert.equal(env.inserted[0]?.["src"], "https://www.googletagmanager.com/gtag/js?id=AW-11400865534");
+  assert.equal(env.inserted.length, 0);
 });
 
 test("explicit refusal does not schedule audience measurement", () => {
   const env = consentEnvironment({ status: "refused", timestamp: 19999999999 });
-  assert.equal(env.timers.length, 0);
+  assert.deepEqual(env.timers.map((timer) => timer.delay), [1000]);
 });
 
 test("acceptance expires after the specified 15552000000 milliseconds", () => {
   const env = consentEnvironment({ status: "accepted", timestamp: 20000000000 - lifetime });
-  assert.equal(env.timers.length, 0);
+  assert.deepEqual(env.timers.map((timer) => timer.delay), [1000]);
 });
 
 test("a valid saved acceptance schedules measurement after 1500 milliseconds", () => {
   const env = consentEnvironment({ status: "accepted", timestamp: 20000000000 - lifetime + 1 });
-  assert.deepEqual(env.timers.map((timer) => timer.delay), [1500]);
+  assert.deepEqual(env.timers.map((timer) => timer.delay), [1500, 1000]);
 });
 
 test("explicit acceptance runs queued and late loaders only once", () => {
@@ -74,8 +74,8 @@ test("explicit acceptance runs queued and late loaders only once", () => {
   start();
   start();
   assert.equal(runs, 0);
-  assert.equal(env.timers.length, 1);
-  env.timers[0]?.run();
+  assert.equal(env.timers.length, 2);
+  env.timers[1]?.run();
   assert.equal(runs, 1);
   queue.push(() => { runs += 1; });
   assert.equal(runs, 2);
@@ -130,7 +130,7 @@ test("thank-you URL retains value and transaction but no contact details", () =>
 });
 
 test("initial page setup does not persist advertising or navigation data", () => {
-  const effect = rootSource.split("function RootComponent()")[1]?.match(/useEffect\(\(\) => \{([\s\S]*?)\n  \}, \[\]\);/)?.[1];
+  const effect = indexSource.split("function Home()")[1]?.match(/useEffect\(\(\) => \{([\s\S]*?)\n  \}, \[\]\);/)?.[1];
   if (!effect) throw new Error("Missing initial page setup");
   const writes: unknown[] = [];
   runInNewContext(`(() => {${effect}})()`, {
@@ -184,4 +184,29 @@ test("submission reads attribution and navigation directly without storing conta
   const redirect = new URL(context.window.location.href);
   assert.equal(redirect.searchParams.get("gclid"), "click-123");
   assert.equal(redirect.searchParams.has("email"), false);
+});
+
+test("Google tag starts only one second after load, with consent denied first", () => {
+  let onLoad: (() => void) | undefined;
+  const env = consentEnvironment();
+  env.context.document.readyState = "loading";
+  env.timers.length = 0;
+  env.inserted.length = 0;
+  env.window["addEventListener"] = (event: string, handler: () => void) => {
+    if (event === "load") onLoad = handler;
+  };
+  runInNewContext(script("consentScript"), env.context);
+  assert.equal(env.timers.length, 0);
+  assert.equal(env.inserted.length, 0);
+  const commands = env.window["dataLayer"] as ArrayLike<unknown>[];
+  const command = commands[0];
+  assert.equal(command?.[0], "consent");
+  assert.equal(command?.[1], "default");
+  assert.equal((command?.[2] as Record<string, unknown>)["ad_storage"], "denied");
+  if (!onLoad) throw new Error("Missing load listener");
+  onLoad();
+  assert.deepEqual(env.timers.map((timer) => timer.delay), [1000]);
+  assert.equal(env.inserted.length, 0);
+  env.timers[0]?.run();
+  assert.equal(env.inserted[0]?.["src"], "https://www.googletagmanager.com/gtag/js?id=AW-11400865534");
 });

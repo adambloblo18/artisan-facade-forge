@@ -1,5 +1,4 @@
 import type { ErrorComponentProps } from "@tanstack/react-router";
-import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
@@ -25,7 +24,7 @@ gtag('consent', 'default', {
   'wait_for_update': 500
 });
 window.lcmChargeurs=window.lcmChargeurs||[];window.lcmChargerMesure=function(){if(window.__lcmMesure)return;window.__lcmMesure=true;var go=function(){var q=window.lcmChargeurs;q.forEach(function(f){try{f()}catch(e){}});q.push=function(f){try{f()}catch(e){}return q.length};};if(document.readyState==='complete')setTimeout(go,1500);else window.addEventListener('load',function(){setTimeout(go,1500)});};try{var c=JSON.parse(localStorage.getItem('cookie_consent')||'null');if(c&&c.status==='accepted'&&Date.now()-c.timestamp<15552000000)window.lcmChargerMesure();}catch(e){}
-var googleTag=document.createElement('script');googleTag.async=true;googleTag.src='https://www.googletagmanager.com/gtag/js?id=AW-11400865534';document.head.appendChild(googleTag);`;
+var loadGoogleTag=function(){setTimeout(function(){var googleTag=document.createElement('script');googleTag.async=true;googleTag.src='https://www.googletagmanager.com/gtag/js?id=AW-11400865534';document.head.appendChild(googleTag);},1000);};if(document.readyState==='complete')loadGoogleTag();else window.addEventListener('load',loadGoogleTag,{once:true});`;
 
 const googleAdsScript = `gtag('js', new Date()); gtag('config', 'AW-11400865534');`;
 
@@ -150,21 +149,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Enseignes et décors céramique sur mesure pour restaurants, hôtels et architectes. Prix du Ravalement Versailles 2025.",
       },
-      {
-        property: "og:image",
-        content:
-          "https://www.ceramique-murale.com/wp-content/uploads/2023/09/6E2BE403-A759-44F8-B5C1-29F488515E32.jpeg",
-      },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Enseignes en céramique peintes à la main pour restaurants | Laurence Brecher" },
       {
         name: "twitter:description",
         content: "Céramique architecturale pour restaurants, hôtels et architectes.",
-      },
-      {
-        name: "twitter:image",
-        content:
-          "https://www.ceramique-murale.com/wp-content/uploads/2023/09/6E2BE403-A759-44F8-B5C1-29F488515E32.jpeg",
       },
     ],
     links: [
@@ -174,7 +163,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
       { rel: "manifest", href: "/site.webmanifest" },
       { rel: "shortcut icon", href: "/favicon.ico" },
-      { rel: "preload", as: "font", type: "font/woff2", href: "/fonts/dm-sans-variable.woff2", crossOrigin: "anonymous" } as any,
+      { rel: "preload", as: "font", type: "font/woff2", href: "/fonts/cormorant-garamond-500.woff2", crossOrigin: "anonymous" },
     ],
     scripts: [
       { children: consentScript },
@@ -210,32 +199,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
 
-    document.documentElement.classList.add("js-ready");
-    if (!("IntersectionObserver" in window)) {
-      document.querySelectorAll(".reveal-on-scroll").forEach((el) => el.classList.add("is-visible"));
-      return;
-    }
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            io.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
-    );
-    const scan = () =>
-      document.querySelectorAll(".reveal-on-scroll:not(.is-visible)").forEach((el) => io.observe(el));
-    scan();
-    const mo = new MutationObserver(scan);
-    mo.observe(document.body, { childList: true, subtree: true });
-    return () => { io.disconnect(); mo.disconnect(); };
-  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

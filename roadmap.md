@@ -12,3 +12,11 @@
 - [x] Retirer le stockage publicitaire et des coordonnées ; lire les informations lors de l'envoi.
 - [x] Placer les cookies au-dessus des actions sur mobile.
 - [x] Vérifier les règles de confidentialité, le formulaire et les textes, sans publier ni changer robots.
+
+## Vitesse mobile
+
+- [x] Alléger la photo de tête et partager srcSet/sizes avec son unique préchargement.
+- [x] Vérifier les images différées, précharger uniquement la police principale du H1 et décaler Google Ads après load + 1 s.
+- [x] Tester cookies, formulaire simulé, hydratation et requêtes sur l'aperçu local, sans publier.
+- [ ] Vérifier le build de production servi localement et les avertissements Circular chunk : aucun artefact de production accessible dans cet environnement.
+- [ ] Mesurer Lighthouse publié : deux tentatives interrompues par net::ERR_ABORTED ; objectif LCP < 2,5 s non confirmé.

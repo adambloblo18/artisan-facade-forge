@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { lazy } from "react";
+import { lazy, useEffect } from "react";
 import { Phone, ArrowRight, Star, Trophy, Clock, Flame, MapPin, Calendar } from "lucide-react";
 import { Zoomable } from "@/components/Lightbox";
 import { Skeleton } from "@/components/ui/skeleton";
 import DeferMount from "@/components/DeferMount";
+import { heroSrcSet, heroSizes } from "@/lib/hero-image";
 
 const MultiStepForm = lazy(() => import("@/components/MultiStepForm"));
 const Faq = lazy(() => import("@/components/Faq"));
@@ -32,6 +33,14 @@ const professionalServiceLd = JSON.stringify({
 export const Route = createFileRoute("/")({
   component: Home,
   head: () => ({
+    meta: [
+      { title: "Enseignes en céramique Art Nouveau pour restaurants · Atelier Brecher" },
+      { name: "description", content: "Enseignes et décors céramique sur mesure pour restaurants, hôtels et architectes. Prix du Ravalement Versailles 2025. Réponse en 20 minutes." },
+      { property: "og:title", content: "Enseignes en céramique peintes à la main pour restaurants | Laurence Brecher" },
+      { property: "og:description", content: "Enseignes et décors céramique sur mesure pour restaurants, hôtels et architectes. Prix du Ravalement Versailles 2025." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
     scripts: [
       { type: "application/ld+json", children: professionalServiceLd },
     ],
@@ -49,16 +58,43 @@ const PHOTOS = {
 };
 
 const REEL = [
-  { src: PHOTOS.hero, alt: "Façade Castor Bellux à Dinard" },
-  { src: PHOTOS.halle, alt: "Médaillons La Halle Marly-Gomont" },
-  { src: PHOTOS.jouvette, alt: "Ferme la Jouvette dans la Drôme" },
-  { src: PHOTOS.mosaique, alt: "Mosaïque de sol Castor Bellux" },
-  { src: PHOTOS.emaux, alt: "Palette de 200 émaux préparés à la main" },
-  { src: PHOTOS.atelier, alt: "Atelier de Laurence au Vésinet" },
-  { src: PHOTOS.laurence, alt: "Laurence Brecher peignant une pièce" },
+  { src: PHOTOS.hero, width: 1280, height: 960, alt: "Façade Castor Bellux à Dinard" },
+  { src: PHOTOS.halle, width: 1200, height: 900, alt: "Médaillons La Halle Marly-Gomont" },
+  { src: PHOTOS.jouvette, width: 769, height: 1024, alt: "Ferme la Jouvette dans la Drôme" },
+  { src: PHOTOS.mosaique, width: 1200, height: 900, alt: "Mosaïque de sol Castor Bellux" },
+  { src: PHOTOS.emaux, width: 1000, height: 1613, alt: "Palette de 200 émaux préparés à la main" },
+  { src: PHOTOS.atelier, width: 500, height: 479, alt: "Atelier de Laurence au Vésinet" },
+  { src: PHOTOS.laurence, width: 500, height: 667, alt: "Laurence Brecher peignant une pièce" },
 ];
 
 function Home() {
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    document.documentElement.classList.add("js-ready");
+    if (!("IntersectionObserver" in window)) {
+      document.querySelectorAll(".reveal-on-scroll").forEach((el) => el.classList.add("is-visible"));
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+    );
+    const scan = () =>
+      document.querySelectorAll(".reveal-on-scroll:not(.is-visible)").forEach((el) => io.observe(el));
+    scan();
+    const mo = new MutationObserver(scan);
+    mo.observe(document.body, { childList: true, subtree: true });
+    return () => { io.disconnect(); mo.disconnect(); };
+  }, []);
+
   return (
     <>
       {/* Bandeau urgence */}
@@ -121,12 +157,14 @@ function Home() {
             <div className="relative">
               <Zoomable
                 src={PHOTOS.hero}
+                srcSet={heroSrcSet}
+                sizes={heroSizes}
                 alt="Façade céramique du restaurant Castor Bellux à Dinard, panneaux peints à la main"
                 className="w-full h-[320px] md:h-[560px] object-cover shadow-[0_40px_80px_-30px_rgba(20,49,59,0.45)]"
                 loading="eager"
                 fetchPriority="high"
-                width={1920}
-                height={1280}
+                width={1280}
+                height={960}
                 images={REEL}
               />
               <div className="hidden md:block absolute -bottom-6 -left-6 bg-[color:var(--cream)] border border-border px-5 py-4 shadow-lg max-w-[220px]">
@@ -170,19 +208,19 @@ function Home() {
           <div className="mt-12 grid md:grid-cols-3 gap-6">
             {[
               {
-                src: PHOTOS.hero,
+                src: PHOTOS.hero, width: 1280, height: 960,
                 title: "Castor Bellux, Dinard",
                 lead: "Une devanture et une mosaïque d'entrée",
                 body: "Quatre panneaux peints à la main, bleu nuit et rouge bordeaux, mosaïque de sol de 3 m × 3 m à l'entrée.",
               },
               {
-                src: PHOTOS.halle,
+                src: PHOTOS.halle, width: 1200, height: 900,
                 title: "La Halle, Marly-Gomont",
                 lead: "Trois médaillons inspirés de Mucha",
                 body: "Médaillons ovales d'un mètre peints un à un, cuits au grand feu, posés sur vert sapin.",
               },
               {
-                src: PHOTOS.jouvette,
+                src: PHOTOS.jouvette, width: 769, height: 1024,
                 title: "Ferme la Jouvette, Drôme",
                 lead: "Un panneau fleuri au-dessus de la porte",
                 body: "Panneau horizontal bleu nuit, constellé de fleurs et papillons, peint à la main et cuit au feu.",
@@ -192,6 +230,10 @@ function Home() {
                 <div className="overflow-hidden">
                   <Zoomable
                     src={p.src}
+                    {...(p.src === PHOTOS.hero ? { srcSet: heroSrcSet, sizes: heroSizes } : {})}
+                    loading="lazy"
+                    width={p.width}
+                    height={p.height}
                     alt={p.title}
                     className="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                     images={REEL}
@@ -242,6 +284,9 @@ function Home() {
             <div className="lg:col-span-7 reveal-on-scroll">
               <Zoomable
                 src={PHOTOS.mosaique}
+                loading="lazy"
+                width={1200}
+                height={900}
                 alt="Mosaïque de sol 3m × 3m de Castor Bellux, motif Art Nouveau"
                 className="w-full h-[400px] md:h-[560px] object-cover shadow-[0_30px_60px_-30px_rgba(20,49,59,0.4)]"
                 images={REEL}
@@ -274,6 +319,9 @@ function Home() {
                 <div key={i} className="shrink-0 w-[280px] md:w-[360px] h-[200px] md:h-[260px] overflow-hidden">
                   <Zoomable
                     src={img.src}
+                    loading="lazy"
+                    width={img.width}
+                    height={img.height}
                     alt={img.alt}
                     className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                     images={REEL}
@@ -303,9 +351,9 @@ function Home() {
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-3 reveal-on-scroll">
-                <Zoomable src={PHOTOS.laurence} alt="Laurence Brecher peignant une pièce de céramique" className="w-full h-72 object-cover col-span-2" images={REEL} />
-                <Zoomable src={PHOTOS.atelier} alt="Atelier de céramique au Vésinet" className="w-full h-52 object-cover" images={REEL} />
-                <Zoomable src={PHOTOS.emaux} alt="Palette de 200 émaux préparés à la main" className="w-full h-52 object-cover" images={REEL} />
+                <Zoomable src={PHOTOS.laurence} loading="lazy" width={500} height={667} alt="Laurence Brecher peignant une pièce de céramique" className="w-full h-72 object-cover col-span-2" images={REEL} />
+                <Zoomable src={PHOTOS.atelier} loading="lazy" width={500} height={479} alt="Atelier de céramique au Vésinet" className="w-full h-52 object-cover" images={REEL} />
+                <Zoomable src={PHOTOS.emaux} loading="lazy" width={1000} height={1613} alt="Palette de 200 émaux préparés à la main" className="w-full h-52 object-cover" images={REEL} />
               </div>
             </div>
           </div>

@@ -113,18 +113,22 @@ export default function Lightbox() {
 
 /** Wrap an <img> to make it click-to-zoom. */
 export function Zoomable({
-  src, alt, className, loading = "lazy", width, height, fetchPriority, images,
+  src, alt, className, loading = "lazy", width, height, fetchPriority, images, srcSet, sizes,
 }: {
   src: string; alt: string; className?: string;
   loading?: "lazy" | "eager"; width?: number; height?: number;
   fetchPriority?: "high" | "low" | "auto";
   images?: ImgRef[];
+  srcSet?: string;
+  sizes?: string;
 }) {
   return (
     <img
       src={src}
       alt={alt}
       loading={loading}
+      srcSet={srcSet}
+      sizes={sizes}
       width={width}
       height={height}
       fetchPriority={fetchPriority}
