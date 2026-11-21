@@ -4,7 +4,7 @@ import { Plus, Minus } from "lucide-react";
 const FAQ = [
   {
     q: "Quel budget prévoir ?",
-    a: "Panneau d'enseigne à partir de 1 500€. Décor de devanture type Castor Bellux : 8 000 à 15 000€. Façade complète type Mucha (18 m²) : au-delà de 20 000€. Votre projet en 1 heure, jours ouvrés.",
+    a: "Panneau d'enseigne à partir de 1 500€. Décor de devanture type Castor Bellux : 8 000 à 15 000€. Façade complète type Mucha (18 m²) : au-delà de 20 000€. Première estimation en 1 heure, jours ouvrés.",
   },
   {
     q: "Comment se pose une enseigne en céramique en façade ?",

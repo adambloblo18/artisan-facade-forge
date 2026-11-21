@@ -265,6 +265,7 @@ function Home() {
         <section className="py-20 md:py-24">
           <div className="container-px max-w-7xl mx-auto text-center reveal-on-scroll">
             <p className="eyebrow">Atelier</p>
+            <h2 className="mt-3 text-3xl md:text-5xl">Quelques pièces sorties de l'atelier.</h2>
           </div>
           <div className="marquee-wrap mt-12 overflow-hidden">
             <div className="marquee">
