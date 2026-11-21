@@ -149,11 +149,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Enseignes et décors céramique sur mesure pour restaurants, hôtels et architectes. Prix du Ravalement Versailles 2025.",
       },
+      {
+        property: "og:image",
+        content:
+          "https://www.ceramique-murale.com/wp-content/uploads/2023/09/6E2BE403-A759-44F8-B5C1-29F488515E32.jpeg",
+      },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Enseignes en céramique peintes à la main pour restaurants | Laurence Brecher" },
       {
         name: "twitter:description",
         content: "Céramique architecturale pour restaurants, hôtels et architectes.",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://www.ceramique-murale.com/wp-content/uploads/2023/09/6E2BE403-A759-44F8-B5C1-29F488515E32.jpeg",
       },
     ],
     links: [
