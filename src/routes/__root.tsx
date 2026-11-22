@@ -75,25 +75,6 @@ posthog.init('phc_oGmkuM4F5je7WmaLZpsF47paa8nv5V5vp58oh74Pwcwy', {
   }
 });});`;
 
-const localBusinessLd = JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: "Les Céramiques Murales du Vésinet",
-  url: "https://www.ceramique-murale.com/",
-  telephone: "+33670025133",
-  priceRange: "€€€",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "14 rue Ernest André",
-    addressLocality: "Le Vésinet",
-    postalCode: "78110",
-    addressCountry: "FR",
-  },
-  founder: { "@type": "Person", name: "Laurence Brecher" },
-  award:
-    "Premier Prix du Ravalement de la Ville de Versailles 2025, catégorie Restitution de Décors",
-});
-
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -135,7 +116,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Enseignes et décors céramique sur mesure pour restaurants, hôtels et architectes. Prix du Ravalement Versailles 2025. Réponse en 20 minutes.",
       },
-      { name: "robots", content: "noindex, follow" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
       { name: "theme-color", content: "#C1583E" },
       { name: "apple-mobile-web-app-title", content: "Céramique Murale Brecher" },
       { name: "application-name", content: "Céramique Murale Brecher" },
@@ -183,7 +164,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { children: uetScript },
       { children: clarityScript },
       { children: posthogScript },
-      { type: "application/ld+json", children: localBusinessLd },
     ],
   }),
   shellComponent: RootShell,

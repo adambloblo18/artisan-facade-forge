@@ -10,24 +10,68 @@ const MultiStepForm = lazy(() => import("@/components/MultiStepForm"));
 const Faq = lazy(() => import("@/components/Faq"));
 const Lightbox = lazy(() => import("@/components/Lightbox"));
 
-const professionalServiceLd = JSON.stringify({
+const siteGraphLd = JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: "Laurence Brecher — Enseignes céramique pour restaurants et hôtels",
-  telephone: "+33670025133",
-  priceRange: "€€€€",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Le Vésinet",
-    postalCode: "78110",
-    addressCountry: "FR",
-  },
-  areaServed: "FR",
-  founder: {
-    "@type": "Person",
-    name: "Laurence Brecher",
-    award: "Prix du Ravalement de Versailles 2025",
-  },
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://www.ceramique-murale.com/#organization",
+      "name": "Les Céramiques Murales du Vésinet",
+      "url": "https://www.ceramique-murale.com/",
+      "telephone": "+33670025133",
+      "foundingDate": "2008",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "14 rue Ernest André",
+        "postalCode": "78110",
+        "addressLocality": "Le Vésinet",
+        "addressRegion": "Île-de-France",
+        "addressCountry": "FR"
+      },
+      "founder": {
+        "@id": "https://www.ceramique-murale.com/#laurence-brecher"
+      },
+      "award": "Prix du Ravalement de la ville de Versailles 2025, catégorie Restitution de Décors",
+      "sameAs": [
+        "https://www.instagram.com/ceramiquesmurales/",
+        "https://www.linkedin.com/company/les-ceramiques-murales/"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.ceramique-murale.com/#laurence-brecher",
+      "name": "Laurence Brecher",
+      "jobTitle": "Artiste céramiste",
+      "url": "https://www.ceramique-murale.com/laurence-brecher-creatrice-de-ceramique-murale-decorative/",
+      "worksFor": {
+        "@id": "https://www.ceramique-murale.com/#organization"
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://restaurant.ceramique-murale.com/#service",
+      "name": "Enseigne et décor en céramique peints à la main pour restaurant",
+      "serviceType": "Enseigne en faïence émaillée",
+      "provider": {
+        "@id": "https://www.ceramique-murale.com/#organization"
+      },
+      "areaServed": "France",
+      "url": "https://restaurant.ceramique-murale.com/"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://restaurant.ceramique-murale.com/#webpage",
+      "url": "https://restaurant.ceramique-murale.com/",
+      "name": "Enseignes en céramique Art Nouveau pour restaurants · Atelier Brecher",
+      "inLanguage": "fr-FR",
+      "about": {
+        "@id": "https://restaurant.ceramique-murale.com/#service"
+      },
+      "publisher": {
+        "@id": "https://www.ceramique-murale.com/#organization"
+      }
+    }
+  ]
 });
 
 export const Route = createFileRoute("/")({
@@ -41,8 +85,9 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://restaurant.ceramique-murale.com/" }],
     scripts: [
-      { type: "application/ld+json", children: professionalServiceLd },
+      { type: "application/ld+json", children: siteGraphLd },
     ],
   }),
 });
